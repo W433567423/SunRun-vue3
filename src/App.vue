@@ -1,6 +1,6 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {computed, onMounted, ref} from "vue";
-import {login} from './api'
+import {getList} from './api'
 import {useStore} from 'vuex'
 
 const store = useStore()
@@ -14,7 +14,7 @@ const homeUserCount = computed(() => store.getters.getHomeUserCount)
 
 // 立即事件
 onMounted(async () => {
-  const res: any = await login({
+  const res: any = await getList({
     page: 0,
     limit: 25
   })
@@ -31,10 +31,10 @@ onMounted(async () => {
     </section>
     <!--    底部导航-->
     <van-tabbar v-model="tabBarIndex" route>
-      <van-tabbar-item replace :to="item.to" :icon="item.icon"
-                       :badge="!item.index?homeUserCount:''"
-                       v-for="(item) in barList"
-                       :key="item.index">主页
+      <van-tabbar-item v-for="(item) in barList" :key="item.index" :badge="!item.index?homeUserCount:''"
+                       :icon="item.icon"
+                       :to="item.to"
+                       replace>主页
       </van-tabbar-item>
     </van-tabbar>
   </div>

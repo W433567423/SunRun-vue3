@@ -5,13 +5,13 @@
       <!--      滚动通知-->
       <van-notice-bar scrollable text="本网站/app/小程序永久免费,请勿通过任何付费渠道获得"/>
       <!--      搜索框-->
-      <van-search v-model="value" placeholder="快速搜索" class="search-box"/>
+      <van-search v-model="searchQuery" class="search-box" placeholder="快速搜索"/>
       <!--      运行时间，人数展示-->
       <van-row class="top-row-box">
         <van-col class="top-col-box" span="12">本站已运行
           <text class="red-text">{{ timeToDur(nowTime, 1665098803000) }}</text>
         </van-col>
-        <van-col span="11" class="top-col-box">本站已为
+        <van-col class="top-col-box" span="11">本站已为
           <text class="red-text">{{ TotalCount }}</text>
           童鞋云跑步
         </van-col>
@@ -22,54 +22,74 @@
       <van-list
           v-model:loading="loading"
           :finished="finished"
+          error-text="有bug出现了喔"
           finished-text="没有更多了"
           loading-text="玩命加载ing"
-          error-text="有bug出现了喔"
           @load="onLoad"
       >
         <van-cell-group title="昵称">
-          <van-cell v-for="item in list" :key="item.username" :title="item.username" clickable
-                    :to="`/person?userNick=${item.username}`"
-                    :value="timeToDur(Number(item.time)+ 86400000 * 7,nowTime)">
+          <van-cell v-for="item in list" :key="item.username" :title="item.username"
+                    :value="timeToDur(Number(item.time)+ 86400000 * 7,nowTime)"
+                    clickable
+                    @click.stop="handlePopupMessage(item.username)">
             <template #right-icon>
-              <van-button
-                  icon="https://fastly.jsdelivr.net/npm/@vant/assets/user-active.png"
-                  type="primary"
-              >
-                按钮
+              <van-button :to="`/person?userNick=${item.username}`" class="info-btn" size="mini" type="primary">
+                详情
+                <van-icon name="arrow"></van-icon>
               </van-button>
             </template>
           </van-cell>
         </van-cell-group>
       </van-list>
     </van-pull-refresh>
+    <!--浮起区域-->
+    <van-popup v-model:show="showCenter" round>
+      <van-card
+          :desc="selectInfo.nickName"
+          num="2"
+          price="2.00"
+          thumb="https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/sunrun/thumb1.jpg"
+          title="商品标题"
+      />
+    </van-popup>
   </div>
 </template>
-<script setup lang="ts">
-import {computed, onMounted, ref} from "vue";
+<script lang="ts" setup>
+import {computed, onBeforeUnmount, onMounted, ref} from "vue";
 import {useStore} from 'vuex'
-import {login} from "../../api";
-import {IUserItem} from "../../store/modules/user/type";
+import {getList, getPerson} from "../../api";
+import {IPerson, IUserItem} from "../../store/modules/user/type";
 import {timeToDur} from "../../utils";
 
-const store = useStore()
+const store = useStore()  //store
 
-const value = ref('');
+const searchQuery = ref(''); // 搜索关键词
 
-const list = ref<IUserItem[]>([]);
-const loading = ref(false);
-const finished = ref(false);
-const refreshing = ref<boolean>(false);
+const list = ref<IUserItem[]>([]);// 循环渲染的列表
+const loading = ref(false);// 加载中flag
+const finished = ref(false); // 么有更多了flag
+const refreshing = ref<boolean>(false); // 下拉刷新flag
 const page = ref<number>(0) //页码
 const nowTime = ref<number>(0) // 当前时间戳
 const TotalCount = computed(() => store.state.user.userCount) // 总计算人数
+let timer = 0 //定时器
+const showCenter = ref<boolean>(false) //展示弹窗
+const selectInfo = ref<IPerson>({
+  nickName: '',
+  AllCount: 0,
+  LastPage: false,
+  RaceMNums: 0,
+  RaceNums: 0,
+  Success: false,
+  listValue: []
 
+}) //展示弹窗
 //下滑加载更多
 const onLoad = async () => {
   console.log('下滑加载更多')
   // 异步更新数据
 
-  const res: any = await login({
+  const res: any = await getList({
     page: page.value,
     limit: 25
   })
@@ -81,12 +101,11 @@ const onLoad = async () => {
   // 没有更多了
   if (!res.data.length) finished.value = true;
 };
-
 // 下拉刷新
 const onRefresh = async () => {
   console.log('下拉刷新')
   page.value = 0
-  const res: any = await login({
+  const res: any = await getList({
     page: page.value,
     limit: 25
   })
@@ -96,16 +115,26 @@ const onRefresh = async () => {
   loading.value = false;
   refreshing.value = false;
 };
-
-const updateTime = () => {
-  nowTime.value += 1000
+//打开详情框
+const handlePopupMessage = async (name: string) => {
+  const {data} = await getPerson(name)
+  selectInfo.value = data as any
+  showCenter.value = true
 }
+
+// 立即事件
 onMounted(() => {
+  // 初始化时间
   nowTime.value = Number((new Date()).getTime())
-  window.setInterval(updateTime, 1000,)
+  //每秒刷新
+  timer = window.setInterval(() => nowTime.value += 1000, 1000,)
+})
+// 离开页面前
+onBeforeUnmount(() => {
+  timer && window.clearInterval(timer)
 })
 </script>
-<style scoped lang="less">
+<style lang="less" scoped>
 .home {
   overflow-y: auto;
   max-height: 100%;
@@ -142,16 +171,9 @@ onMounted(() => {
     z-index: 9;
   }
 
-  .info-icon {
-    //background-color: red;
-    line-height: 24px;
+  .info-btn {
     margin-left: 12px;
   }
 
-  .circle {
-    //height: 20px;
-    //background-color: yellow;
-    //width: 20px;
-  }
 }
 </style>

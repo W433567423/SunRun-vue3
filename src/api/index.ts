@@ -14,8 +14,11 @@ export interface UserListResData {
     status: number
 }
 
-// 用户登录
-export const login = (params: UserLisReqForm) => {
-    // 返回的数据格式可以和服务端约定
-    return axios.get<UserListResData>('/api/sunrun/', params);
+//渲染列表
+export const getList = (params: UserLisReqForm) => {
+    return axios.get<UserListResData>('/', params);
+}
+// 获取用户个人信息
+export const getPerson = (params: string) => {
+    return axios.get<UserListResData>('/data', {username: params});
 }

@@ -11,7 +11,10 @@ import {
     Col,
     Row,
     Icon,
-    Button, Tabbar, TabbarItem
+    Button,
+    Tabbar,
+    TabbarItem
+    , Popup, Card
 } from 'vant'
 
 const components = [
@@ -25,7 +28,10 @@ const components = [
     Col,
     Row,
     Icon,
-    Button, Tabbar, TabbarItem
+    Button,
+    Tabbar,
+    TabbarItem,
+    Popup, Card
 ]
 
 //全局注册常用组件

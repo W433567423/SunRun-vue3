@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios'
+import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios'
 import {Notify} from 'vant';
 // 数据返回的接口
 // 定义请求响应参数，不含data
@@ -12,7 +12,7 @@ interface ResultData<T = any> extends Result {
     data?: T;
 }
 
-const URL = 'https://asr.wtututu.top'
+const URL = 'https://asr.wtututu.top/api/sunrun'
 
 enum RequestEnums {
     TIMEOUT = 20000,
