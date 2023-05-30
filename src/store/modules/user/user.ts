@@ -1,8 +1,16 @@
-import * as types from './type.ts'
+import * as types from './type'
+
 export default {
-  namespace: true,
-  state: {},
-  mutations: {},
-  actions: {},
-  getters: {}
+    namespace: true,
+    state: () => {
+        const userList: types.IUserItem[] = []
+        const userCount = ''
+        return {
+            userCount,
+            userList
+        }
+    },
+    mutations: {},
+    actions: {},
+    getters: {}
 }
