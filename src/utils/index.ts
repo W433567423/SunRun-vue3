@@ -1,5 +1,6 @@
 // 计算时间段之差
-const timeToDur = (etime: number, stime = (new Date()).getTime(), sec = false) => {
+// 结束时间，开始时间，显示秒
+const timeToDur = (etime: number, stime = (new Date()).getTime(), sec = true) => {
     //总毫秒数
     const usedTime = etime - stime
     const days = Math.floor(usedTime / (24 * 3600 * 1000))

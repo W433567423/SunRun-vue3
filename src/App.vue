@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {computed, onMounted, ref} from "vue";
-import {Tabbar, TabbarItem} from 'vant';
 import {login} from './api'
 import {useStore} from 'vuex'
 
@@ -31,13 +30,13 @@ onMounted(async () => {
       <router-view/>
     </section>
     <!--    底部导航-->
-    <Tabbar v-model="tabBarIndex" route>
-      <TabbarItem replace :to="item.to" :icon="item.icon"
-                  :badge="!item.index?homeUserCount:''"
-                  v-for="(item) in barList"
-                  :key="item.index">主页
-      </TabbarItem>
-    </Tabbar>
+    <van-tabbar v-model="tabBarIndex" route>
+      <van-tabbar-item replace :to="item.to" :icon="item.icon"
+                       :badge="!item.index?homeUserCount:''"
+                       v-for="(item) in barList"
+                       :key="item.index">主页
+      </van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 
