@@ -1,6 +1,17 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {Tabbar, TabbarItem} from 'vant';
+import {login} from './api'
+
+const userCount = ref<string>('')
+onMounted(async () => {
+
+  const res: any = await login({
+    page: 0,
+    limit: 25
+  })
+  userCount.value = res.count.toString()
+})
 
 const tabBarIndex = ref<number>(0) // 路由索引
 const barList = [{to: '/home', icon: 'home-o', text: '主页', index: 0},
@@ -18,7 +29,7 @@ const barList = [{to: '/home', icon: 'home-o', text: '主页', index: 0},
     <!--    底部导航-->
     <Tabbar v-model="tabBarIndex" route>
       <TabbarItem replace :to="item.to" :icon="item.icon"
-                  :badge="tabBarIndex===item.index? 3:''"
+                  :badge="tabBarIndex===item.index? userCount:''"
                   v-for="(item) in barList"
                   :key="item.index">主页
       </TabbarItem>
