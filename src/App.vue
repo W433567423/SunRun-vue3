@@ -20,7 +20,7 @@ onMounted(async () => {
     limit: 25
   })
   store.commit('setUserCount', res.count.toString())
-  store.commit('setUserList', res.data)
+  store.commit('setUserHomeCount', res.data.length)
 })
 </script>
 
@@ -50,7 +50,6 @@ onMounted(async () => {
   .content {
     width: 100%;
     height: calc(100vh - 50px);
-    background-color: pink;
   }
 
 }

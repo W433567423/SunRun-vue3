@@ -3,11 +3,11 @@ import * as types from './type'
 export default {
     namespace: true,
     state: () => {
-        const userList: types.IUserItem[] = []
+        const userHomeCount = ''
         const userCount = ''
         return {
             userCount,
-            userList
+            userHomeCount
         }
     },
     mutations: {
@@ -15,8 +15,8 @@ export default {
             state.userCount = num
 
         },
-        setUserList(state: any, list: types.IUserItem[]) {
-            state.userList = list
+        setUserHomeCount(state: any, num: string) {
+            state.userHomeCount = num
 
         }
     },
@@ -24,7 +24,7 @@ export default {
     getters: {
         //获取主页用户数
         getHomeUserCount(state: any) {
-            return state.userList.length
+            return state.userHomeCount
         }
     }
 }
