@@ -6,7 +6,7 @@
     <Cell title="昵称" value="有效期"/>
 
     <PullRefresh v-model="refreshing" @refresh="onRefresh">
-      <List
+      <vantList
           v-model:loading="loading"
           :finished="finished"
           finished-text="没有更多了"
@@ -16,14 +16,14 @@
       >
         <Cell v-for="item in list" :key="item.username" :title="item.username"
               :value="timeToDur(Number(item.time)+ 86400000 * 7)"/>
-      </List>
+      </vantList>
     </PullRefresh>
   </div>
 </template>
 <script setup lang="ts">
-import {Search, Cell, List, PullRefresh, Sticky} from 'vant';
+import {Search, Cell, List as vantList, PullRefresh, Sticky} from 'vant';
 import 'vant/es/toast/style';
-import {computed, ref} from "vue";
+import {ref} from "vue";
 import {useStore} from 'vuex'
 import {login} from "../../api";
 import {IUserItem} from "../../store/modules/user/type";
