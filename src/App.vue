@@ -34,7 +34,7 @@ onMounted(async () => {
       <van-tabbar-item v-for="(item) in barList" :key="item.index" :badge="!item.index?homeUserCount:''"
                        :icon="item.icon"
                        :to="item.to"
-                       replace>主页
+                       replace>{{ item.text }}
       </van-tabbar-item>
     </van-tabbar>
   </div>
