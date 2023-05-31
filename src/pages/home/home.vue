@@ -19,7 +19,7 @@
     </van-sticky>
     <!--列表区域-->
     <van-pull-refresh v-model="loading" @refresh="onRefresh">
-      <van-watermark :height="192" :width="180" content="tutu" style="margin:24px 0 0 80px;"/>
+      <van-watermark :height="192" :width="160" content="tutu" style="margin:24px 0 0 100px;"/>
       <van-list
           v-model:loading="loading"
           :finished="finished"
@@ -138,6 +138,8 @@ onBeforeUnmount(() => {
   .top-row-box {
     display: flex;
     justify-content: space-around;
+    background-color: #fff;
+    padding: 4px 0;
 
     .top-col-box {
       font-size: 9px;
