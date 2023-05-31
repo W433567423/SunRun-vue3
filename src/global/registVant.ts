@@ -1,37 +1,29 @@
 import {App} from 'vue'
 import 'vant/lib/index.css';
 import {
-    Search,
-    Cell,
-    List as vantList,
-    PullRefresh,
-    Sticky,
-    CellGroup,
-    NoticeBar,
-    Col,
-    Row,
-    Icon,
     Button,
+    Card,
+    Cell,
+    CellGroup,
+    Col,
+    Divider,
+    Icon,
+    List,
+    NoticeBar,
+    Popup,
+    PullRefresh,
+    Row,
+    Search,
+    Sticky,
     Tabbar,
-    TabbarItem
-    , Popup, Card
+    TabbarItem,
+    Watermark
 } from 'vant'
 
 const components = [
-    Search,
-    Cell,
-    vantList,
-    PullRefresh,
-    Sticky,
-    CellGroup,
-    NoticeBar,
-    Col,
-    Row,
-    Icon,
-    Button,
-    Tabbar,
-    TabbarItem,
-    Popup, Card
+    Search, Cell, List, PullRefresh, Sticky, CellGroup,
+    NoticeBar, Col, Row, Icon, Button, Tabbar, TabbarItem,
+    Popup, Card, Watermark, Divider
 ]
 
 //全局注册常用组件

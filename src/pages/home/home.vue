@@ -19,6 +19,7 @@
     </van-sticky>
     <!--列表区域-->
     <van-pull-refresh v-model="loading" @refresh="onRefresh">
+      <van-watermark :height="160" :width="180" content="tutu" style="margin-left: 80px;"/>
       <van-list
           v-model:loading="loading"
           :finished="finished"
@@ -44,13 +45,7 @@
     </van-pull-refresh>
     <!--浮起区域-->
     <van-popup v-model:show="showCenter" round>
-      <van-card
-          :desc="selectInfo.nickName"
-          num="2"
-          price="2.00"
-          thumb="https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/sunrun/thumb1.jpg"
-          title="商品标题"
-      />
+      <PersonInfo :person-item="selectInfo"></PersonInfo>
     </van-popup>
   </div>
 </template>
@@ -58,8 +53,9 @@
 import {computed, onBeforeUnmount, onMounted, ref} from "vue";
 import {useStore} from 'vuex'
 import {getList, getPerson} from "../../api";
-import {IPerson, IUserItem} from "../../store/modules/user/type";
+import {IPersonN, IUserItem} from "../../store/modules/user/type";
 import {timeToDur} from "../../utils";
+import PersonInfo from "../../components/PersonInfo.vue";
 
 const store = useStore()  //store
 
@@ -74,7 +70,7 @@ const nowTime = ref<number>(0) // 当前时间戳
 const TotalCount = computed(() => store.state.user.userCount) // 总计算人数
 let timer = 0 //定时器
 const showCenter = ref<boolean>(false) //展示弹窗
-const selectInfo = ref<IPerson>({
+const selectInfo = ref<IPersonN>({
   nickName: '',
   AllCount: 0,
   LastPage: false,
@@ -82,7 +78,6 @@ const selectInfo = ref<IPerson>({
   RaceNums: 0,
   Success: false,
   listValue: []
-
 }) //展示弹窗
 //下滑加载更多
 const onLoad = async () => {
@@ -118,7 +113,7 @@ const onRefresh = async () => {
 //打开详情框
 const handlePopupMessage = async (name: string) => {
   const {data} = await getPerson(name)
-  selectInfo.value = data as any
+  selectInfo.value = {...data as any, nickName: name}
   showCenter.value = true
 }
 

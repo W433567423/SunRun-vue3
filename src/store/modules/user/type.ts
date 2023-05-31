@@ -4,13 +4,16 @@ interface IUserItem {
 }
 
 interface IPerson {
-    nickName?: string
     AllCount: number
     LastPage: boolean
     RaceMNums: number
     RaceNums: number
     Success: boolean
     listValue: IPersonListValue[]
+}
+
+interface IPersonN extends IPerson {
+    nickName: string
 }
 
 interface IPersonListValue {
@@ -24,4 +27,4 @@ interface IPersonListValue {
     StepNum: number
 }
 
-export type {IUserItem, IPerson}
+export type {IUserItem, IPerson, IPersonN}

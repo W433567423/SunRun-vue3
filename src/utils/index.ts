@@ -19,4 +19,7 @@ const timeToDur = (etime: number, stime = (new Date()).getTime(), sec = true) =>
         return time + seconds + "秒"
     }
 }
-export {timeToDur}
+
+
+const random = (min: any, max: any) => Math.floor(Math.random() * (max - min + 1) + min)
+export {timeToDur, random}
