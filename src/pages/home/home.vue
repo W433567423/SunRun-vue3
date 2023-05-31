@@ -44,7 +44,7 @@
       </van-list>
     </van-pull-refresh>
     <!--浮起区域-->
-    <van-popup v-model:show="showCenter" round>
+    <van-popup v-model:show="showCenter" round style="overflow: hidden">
       <PersonInfo :person-item="selectInfo"></PersonInfo>
     </van-popup>
   </div>

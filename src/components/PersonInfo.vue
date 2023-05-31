@@ -14,52 +14,38 @@ console.log(props)
     <van-watermark :height="72" :width="140" content="tutu" style="margin:-10px 0 0 100px;"/>
     <img alt="头像" class="thumb-img" src="https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/sunrun/thumb1.jpg">
     <div class="detail-info ">
-      <text>
-        <p class="title-area">昵称</p>
+      <text class="flex-area">
+        <text class="title-area">昵称</text>
         <van-divider :style="{ borderColor: '#1989fa' }" vertical/>
         <text class="text-area">
           {{ personItem.nickName }}
         </text>
       </text>
-      <br>
-      <!--      <text>-->
-      <!--        <p class="title-area">总次数</p>-->
-      <!--        <van-divider :style="{ borderColor: '#1989fa' }" vertical/>-->
-      <!--        <text class="text-area">-->
-      <!--          {{ personItem.AllCount }}-->
-      <!--        </text>-->
-      <!--      </text>-->
-      <!--      <br>-->
-      <text>
-        <p class="title-area">总次数</p>
+      <text class="flex-area">
+        <text class="title-area">总次数</text>
         <van-divider :style="{ borderColor: '#1989fa' }" vertical/>
         <text class="text-area">
           {{ personItem.RaceNums }}
         </text>
       </text>
-      <br>
-      <text>
-        <p class="title-area">晨跑次数</p>
+      <text class="flex-area">
+        <text class="title-area">晨跑次数</text>
         <van-divider :style="{ borderColor: '#1989fa' }" vertical/>
         <text class="text-area">
           {{ personItem.RaceMNums }}
         </text>
       </text>
     </div>
-    <!--    <p>是否最后一页？:{{ personItem.LastPage }}</p>-->
-    <!--    <p>记录列表:{{ personItem.listValue }}</p>-->
-    <!--    <p>成功？:{{ personItem.Success }}</p>-->
   </div>
 </template>
 
 <style lang="less" scoped>
 .person-info {
-  width: 300px;
+  //max-width: 320px;
   height: 120px;
   display: flex;
   padding: 10px;
   box-sizing: border-box;
-  overflow: hidden;
 
   .thumb-img {
     width: 100px;
@@ -68,20 +54,35 @@ console.log(props)
   }
 
   .detail-info {
-    margin-left: 20px;
-    padding-top: 16px;
+    margin-left: 16px;
+    padding: 16px 0 0;
+    height: 80px;
     overflow: hidden;
 
-    .title-area {
-      width: 64px;
-      margin: 0;
-      height: 20px;
-      display: inline-block;
-    }
+    .flex-area {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
 
-    .text-area {
-      font-weight: 600;
+      .title-area {
+        width: 60px;
+        //height: 20px;
+        font-size: 14px;
+        margin: 0;
+        padding: 0;
+      }
+
+      .text-area {
+        width: 112px;
+        font-weight: 600;
+
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 14px;
+      }
     }
   }
+
 }
 </style>
