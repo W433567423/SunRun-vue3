@@ -15,6 +15,7 @@ import {
     PullRefresh,
     Row,
     Search,
+    showDialog,
     Sticky,
     Tabbar,
     TabbarItem,
@@ -24,7 +25,7 @@ import {
 const components = [
     Search, Cell, List, PullRefresh, Sticky, CellGroup,
     NoticeBar, Col, Row, Icon, Button, Tabbar, TabbarItem,
-    Popup, Card, Watermark, Divider, BackTop
+    Popup, Card, Watermark, Divider, BackTop, showDialog
 ]
 
 //全局注册常用组件

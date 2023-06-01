@@ -1,5 +1,5 @@
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios'
-import {showNotify} from 'vant';
+import {showConfirmDialog, showDialog, showNotify} from 'vant';
 // 数据返回的接口
 // 定义请求响应参数，不含data
 interface Result {
@@ -20,6 +20,7 @@ enum RequestEnums {
     OVERDUE = 600, // 登录失效
     FAIL = 999, // 请求失败
     SUCCESS = 200, // 请求成功
+    IMEI_ERROR = 402
 }
 
 const config = {
@@ -80,11 +81,37 @@ class RequestHttp {
                     return Promise.reject(data);
                 }
                 // 全局错误信息拦截（防止下载文件得时候返回数据流，没有code，直接报错）
-                if (data.code && data.code !== RequestEnums.SUCCESS) {
+                if (data.code && data.code === RequestEnums.SUCCESS) {
+                    return data;
+                } else {
+                    if (data.code && data.code === RequestEnums.IMEI_ERROR) {
+                        showConfirmDialog({
+                            title: '警告',
+                            message: `可能的原因有:\n${data.message}`,
+                            showCancelButton: true,
+                            showConfirmButton: true,
+                            cancelButtonText: '爷就不',
+                            confirmButtonText: '去上传IMEI',
+                            messageAlign: "left"
+                        }).then(() => {
+                                // 去上传页面
+                                window.location.hash = '/upload'
+                                return undefined
+                            }
+                        ).catch(() => {
+                            // 爷不去
+                            showDialog({
+                                title: '',
+                                message: '皮？\n看我锤爆你!\n以雷霆击碎黑暗~',
+                                messageAlign: "left"
+                            })
+                            return
+                        })
+                        return Promise.reject(data)
+                    }
                     showNotify(data); // 此处也可以使用组件提示报错信息
                     return Promise.reject(data)
                 }
-                return data;
             },
             (error: AxiosError) => {
                 const {response} = error;
