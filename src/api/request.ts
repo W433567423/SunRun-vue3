@@ -1,5 +1,5 @@
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios'
-import {Notify} from 'vant';
+import {showNotify} from 'vant';
 // 数据返回的接口
 // 定义请求响应参数，不含data
 interface Result {
@@ -81,7 +81,7 @@ class RequestHttp {
                 }
                 // 全局错误信息拦截（防止下载文件得时候返回数据流，没有code，直接报错）
                 if (data.code && data.code !== RequestEnums.SUCCESS) {
-                    Notify.error(data); // 此处也可以使用组件提示报错信息
+                    showNotify(data); // 此处也可以使用组件提示报错信息
                     return Promise.reject(data)
                 }
                 return data;
@@ -92,7 +92,7 @@ class RequestHttp {
                     this.handleCode(response.status)
                 }
                 if (!window.navigator.onLine) {
-                    Notify.error('网络连接失败');
+                    showNotify('网络连接失败');
                     // 可以跳转到错误页面，也可以不做操作
                     // return router.replace({
                     //   path: '/404'
@@ -105,10 +105,10 @@ class RequestHttp {
     handleCode(code: number): void {
         switch (code) {
             case 401:
-                Notify.error('登录失败，请重新登录');
+                showNotify('登录失败，请重新登录');
                 break;
             default:
-                Notify.error('请求失败');
+                showNotify('请求失败');
                 break;
         }
     }

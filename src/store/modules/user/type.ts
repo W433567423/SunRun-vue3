@@ -1,6 +1,6 @@
 interface IUserItem {
-    username: string
-    time: string
+    nickName: string
+    updatedTime: string
 }
 
 interface IPerson {
