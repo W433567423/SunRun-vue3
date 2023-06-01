@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import {computed, onMounted, ref} from "vue";
-import {getList} from './api'
+import {computed, ref} from "vue";
 import {useStore} from 'vuex'
 
 const store = useStore()
@@ -12,15 +11,6 @@ const barList = [{to: '/home', icon: 'home-o', text: '主页', index: 0},
 const tabBarIndex = ref<number>(0) // 路由索引
 const homeUserCount = computed(() => store.getters.getHomeUserCount)
 
-// 立即事件
-onMounted(async () => {
-  const res: any = await getList({
-    page: 0,
-    limit: 25
-  })
-  store.commit('setUserCount', res.count.toString())
-  store.commit('setUserHomeCount', res.data.length)
-})
 </script>
 
 <template>

@@ -12,7 +12,8 @@ interface ResultData<T = any> extends Result {
     data?: T;
 }
 
-const URL = 'https://asr.wtututu.top/api/sunrun'
+// const URL = 'https://asr.wtututu.top/api/sunrun'
+const URL = 'http://127.0.0.1:8000/sunRun'
 
 enum RequestEnums {
     TIMEOUT = 20000,
@@ -68,6 +69,7 @@ class RequestHttp {
          */
         this.service.interceptors.response.use(
             (response: AxiosResponse) => {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const {data, config} = response; // 解构
                 if (data.code === RequestEnums.OVERDUE) {
                     // 登录信息失效，应跳转到登录页面，并清空本地的token

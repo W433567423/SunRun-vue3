@@ -1,6 +1,7 @@
 import {App} from 'vue'
 import 'vant/lib/index.css';
 import {
+    BackTop,
     Button,
     Card,
     Cell,
@@ -23,7 +24,7 @@ import {
 const components = [
     Search, Cell, List, PullRefresh, Sticky, CellGroup,
     NoticeBar, Col, Row, Icon, Button, Tabbar, TabbarItem,
-    Popup, Card, Watermark, Divider
+    Popup, Card, Watermark, Divider, BackTop
 ]
 
 //全局注册常用组件

@@ -40,6 +40,8 @@
               </van-button>
             </template>
           </van-cell>
+          <!--          回到顶部-->
+          <van-back-top bottom="10vh" right="20vw"/>
         </van-cell-group>
       </van-list>
     </van-pull-refresh>
@@ -52,7 +54,7 @@
 <script lang="ts" setup>
 import {computed, onBeforeUnmount, onMounted, ref} from "vue";
 import {useStore} from 'vuex'
-import {getList, getPerson} from "../../api";
+import {getList, getPerson, getTotalUser} from "../../api";
 import {IPersonN, IUserItem} from "../../store/modules/user/type";
 import {timeToDur} from "../../utils";
 import PersonInfo from "../../components/PersonInfo.vue";
@@ -66,6 +68,7 @@ const loading = ref(false);// 加载中flag
 const finished = ref(false); // 么有更多了flag
 const refreshing = ref<boolean>(false); // 下拉刷新flag
 const page = ref<number>(0) //页码
+const limit = ref<number>(25) //每页数量
 const nowTime = ref<number>(0) // 当前时间戳
 const TotalCount = computed(() => store.state.user.userCount) // 总计算人数
 let timer = 0 //定时器
@@ -86,10 +89,9 @@ const onLoad = async () => {
 
   const res: any = await getList({
     page: page.value,
-    limit: 25
+    limit: limit.value
   })
   list.value = list.value.concat(res.data)
-  store.commit('setUserCount', res.count.toString())
   store.commit('setUserHomeCount', list.value.length)
   loading.value = false;
   page.value++
@@ -102,13 +104,14 @@ const onRefresh = async () => {
   page.value = 0
   const res: any = await getList({
     page: page.value,
-    limit: 25
+    limit: limit.value
   })
   list.value = res.data
-  store.commit('setUserCount', res.count.toString())
   store.commit('setUserHomeCount', list.value.length)
+  page.value++
   loading.value = false;
   refreshing.value = false;
+  finished.value = false
 };
 //打开详情框
 const handlePopupMessage = async (name: string) => {
@@ -118,11 +121,14 @@ const handlePopupMessage = async (name: string) => {
 }
 
 // 立即事件
-onMounted(() => {
+onMounted(async () => {
   // 初始化时间
   nowTime.value = Number((new Date()).getTime())
   //每秒刷新
   timer = window.setInterval(() => nowTime.value += 1000, 1000,)
+// 刷新总人数
+  const {data} = await getTotalUser()
+  store.commit('setUserCount', data)
 })
 // 离开页面前
 onBeforeUnmount(() => {

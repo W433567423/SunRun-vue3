@@ -16,9 +16,13 @@ export interface UserListResData {
 
 //渲染列表
 export const getList = (params: UserLisReqForm) => {
-    return axios.get<UserListResData>('/', params);
+    return axios.get<UserListResData>('/data/list', params);
 }
 // 获取用户个人信息
 export const getPerson = (params: string) => {
     return axios.get<UserListResData>('/data', {username: params});
+}
+// 获取总使用人数
+export const getTotalUser = () => {
+    return axios.get<UserListResData>('/user/totalUser',);
 }
