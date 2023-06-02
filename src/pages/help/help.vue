@@ -1,10 +1,10 @@
 <template>
   <div class="help">
     <van-steps :active="activeStep" active-color="#07c160" active-icon="success">
-      <van-step>安装软件</van-step>
-      <van-step>观看教程</van-step>
-      <van-step>上手抓包</van-step>
-      <van-step>上传IMEI</van-step>
+      <van-step @click="active=0">安装软件</van-step>
+      <van-step @click="active=1">观看教程</van-step>
+      <van-step @click="active=3">上手抓包</van-step>
+      <van-step @click="active=4">上传IMEI</van-step>
     </van-steps>
     <van-collapse v-model="active" accordion>
       <ApkPart :name="0" title="安装包集合"></ApkPart>
@@ -21,8 +21,15 @@
         <van-cell class="help-link" title="来自 君绾墨"
                   @click="handleGoLink('https://czyx007.cn/archives/wireshark-sunnyrun')"></van-cell>
       </van-collapse-item>
-      <van-collapse-item :name="4" title="食用教程">
+      <van-collapse-item :name="4" title="必看">
         <van-divider dashed>待写</van-divider>
+        <ol>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
       </van-collapse-item>
     </van-collapse>
   </div>
