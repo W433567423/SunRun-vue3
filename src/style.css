@@ -43,3 +43,12 @@ body {
 ::-webkit-scrollbar {
     width: 0;
 }
+
+.link-text {
+    color: #1989fa;
+    text-decoration: underline;
+}
+
+.red-text {
+    color: red
+}

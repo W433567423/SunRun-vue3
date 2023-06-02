@@ -6,7 +6,11 @@ withDefaults(defineProps<IApkProps>(), {})
 </script>
 
 <template>
-  <van-collapse-item :name="name" :title="title" class="apk-area">
+  <van-collapse-item :name="name" class="apk-area">
+
+    <template #title>
+      <text style="font-weight: 400;margin-left: 8px;">{{ title }}</text>
+    </template>
     <van-grid :column-num="2" clickable>
       <van-grid-item url="https://wwc.lanzoul.com/iPrXN0da7vpc">
         <img alt="" class="apk-img" src="https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/sunrun/HttpCanary.jpg">

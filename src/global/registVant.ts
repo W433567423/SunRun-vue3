@@ -10,6 +10,8 @@ import {
     Collapse,
     CollapseItem,
     Divider,
+    Field,
+    Form,
     Grid,
     GridItem,
     Icon,
@@ -35,7 +37,7 @@ const components = [
     NoticeBar, Col, Row, Icon, Button, Tabbar, TabbarItem,
     Popup, Card, Watermark, Divider, BackTop, Collapse,
     CollapseItem, Swipe, SwipeItem, Progress, Grid,
-    GridItem, Step, Steps, Divider
+    GridItem, Step, Steps, Form, Field, CellGroup
 ]
 
 //全局注册常用组件

@@ -17,21 +17,52 @@
                 :width="width"
                 title="【图文】IOS教程"></HelpPart>
       <!--      食用说明-->
-      <van-collapse-item :name="3" title="第三方教程">
+      <van-collapse-item :name="3" title="【第三方】教程">
         <van-cell class="help-link" title="来自 君绾墨"
                   @click="handleGoLink('https://czyx007.cn/archives/wireshark-sunnyrun')"></van-cell>
       </van-collapse-item>
-      <van-collapse-item :name="4" title="必看">
-        <van-divider dashed>待写</van-divider>
-        <ol>
-          <li>付费答疑:QQ:227384408</li>
-          <li>点击右下角[关于]，再点击[乐捐]</li>
-          <li>申明:付费的意义仅仅是为了避免不动脑就打扰</li>
-          <li>一次三元，三元解君愁！！！</li>
-          <li>每个人只用一个昵称，滥用昵称后果自负</li>
-          <li>长跑时间：6:00-8:30、16:00-22:30（其他时间跑步成绩无效）</li>
-          <li>长跑要求：男生2000（2米每秒-5.5米每秒）<br>女生1600（1.6米每秒-5.5米每秒）</li>
-          <li>南湖也可以用，不要再来问我了！很忙，谢谢！</li>
+      <van-collapse-item :name="4">
+        <template #title>
+          <text style="font-weight: 400;margin-left: 8px;">必看</text>
+        </template>
+        <ol class="help-text-ol">
+          <van-divider class="helpDivider">
+            官方规则
+          </van-divider>
+          <li class="disc-text-li">长跑时间：6:00-8:30、16:00-22:30</li>
+          <li class="disc-text-li">长跑要求：男生2000米(2米每秒-5.5米每秒)<br>女生1600米(1.6米每秒-5.5米每秒)</li>
+
+          <van-divider class="helpDivider">
+            本网规则
+          </van-divider>
+          <li class="disc-text-li">每个人只用一个昵称，滥用昵称后果自负</li>
+          <li class="disc-text-li">本网站适用于所有使用
+            <text class="red-text">阳光体育服务平台</text>
+            的学校
+          </li>
+
+          <van-divider class="helpDivider">
+            获取帮助
+          </van-divider>
+          <li class="disc-text-li">付费答疑:QQ
+            <text class="link-text"
+                  @click="handleGoLink('https://api.sumt.cn/api/qq.talk.php?qq=227384408&format=card')">227384408
+            </text>
+          </li>
+          <li class="disc-text-li">点击右下角[
+            <text class="red-text">关于</text>
+            ]，再点击[
+            <text class="red-text">乐捐</text>
+            ]
+          </li>
+          <li class="disc-text-li">
+            <text class="red-text">申明:
+            </text>
+            付费的意义仅仅是为了避免无脑骚扰本站主
+          </li>
+          <li class="good-text-li">
+            <text class="red-text">一次三元，三元解君愁！！！</text>
+          </li>
         </ol>
       </van-collapse-item>
     </van-collapse>
@@ -46,7 +77,7 @@ import {handleGoLink} from "../../utils";
 import HelpPart from "./cpns/HelpPart.vue";
 import ApkPart from "./cpns/ApkPart.vue";
 
-const active = ref<number>(0);// 默认打开哪个教程
+const active = ref<number>(4);// 默认打开哪个教程
 const activeStep = computed(() => {
   switch (active.value) {
     case 0:
@@ -107,47 +138,35 @@ const handleChangeActive = (num: number) => active.value = num
 <style lang="less" scoped>
 .help {
   width: 100%;
-  //height: c100%;
-  //overflow: hidden;
   overflow-y: auto;
   height: 1000px;
-  //图文教程
-  .help-area {
-    position: relative;
 
-    .swipe-img {
-      width: 100%;
-      transform: translateY(-30px);
-    }
-
-    .img-text {
-      background-color: rgba(255, 255, 255, 0.6);
-      position: absolute;
-      color: #7232dd;
-      bottom: -30px;
-      left: 0;
-      font-size: 24px;
-      font-weight: 700;
-      width: 100%;
-      margin: 0 auto 30px;
-      text-align: center;
-      padding-bottom: 30px;
-    }
-
-    .img-progress {
-      position: absolute;
-      bottom: 10px;
-      left: 0;
-      width: 90%;
-      margin-left: 5%;
-    }
-
-  }
-
+  // 第三方链接
   .help-link {
     padding: 0 0 0 20px;
     color: #88c0fa;
 
+  }
+
+  // 必看文本
+  .help-text-ol {
+    padding-left: 20px;
+
+
+    .helpDivider {
+      color: #1989fa;
+      border-color: #1989fa;
+      padding: 0 16px;
+      margin-left: -20px;
+    }
+
+    .disc-text-li {
+      list-style-type: disc;
+    }
+
+    .good-text-li {
+      list-style-type: "\1F44D";
+    }
   }
 
 
