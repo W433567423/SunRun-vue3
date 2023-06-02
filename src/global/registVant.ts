@@ -7,25 +7,33 @@ import {
     Cell,
     CellGroup,
     Col,
+    Collapse,
+    CollapseItem,
     Divider,
+    Grid,
+    GridItem,
     Icon,
     List,
     NoticeBar,
     Popup,
+    Progress,
     PullRefresh,
     Row,
     Search,
-    showDialog,
     Sticky,
+    Swipe,
+    SwipeItem,
     Tabbar,
     TabbarItem,
-    Watermark
+    Watermark,
 } from 'vant'
 
 const components = [
     Search, Cell, List, PullRefresh, Sticky, CellGroup,
     NoticeBar, Col, Row, Icon, Button, Tabbar, TabbarItem,
-    Popup, Card, Watermark, Divider, BackTop, showDialog
+    Popup, Card, Watermark, Divider, BackTop, Collapse,
+    CollapseItem, Swipe, SwipeItem, Progress, Grid,
+    GridItem
 ]
 
 //全局注册常用组件
