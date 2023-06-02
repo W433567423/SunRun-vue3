@@ -10,4 +10,9 @@ interface IApkProps {
     title: string
 }
 
-export type {IApkProps, IHelpProps}
+interface IInfoItem {
+    android?: string
+    ios?: string
+}
+
+export type {IApkProps, IHelpProps, IInfoItem}
