@@ -20,6 +20,7 @@ const timeToDur = (etime: number, stime = (new Date()).getTime(), sec = true) =>
     }
 }
 
+const handleGoLink = (url: string) => url.slice(0, 4) === 'http' ? window.location.href = url : window.location.hash = url
 
 const random = (min: any, max: any) => Math.floor(Math.random() * (max - min + 1) + min)
-export {timeToDur, random}
+export {timeToDur, random, handleGoLink}
