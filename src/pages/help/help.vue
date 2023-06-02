@@ -1,10 +1,10 @@
 <template>
   <div class="help">
     <van-steps :active="activeStep" active-color="#07c160" active-icon="success">
-      <van-step @click="active=0">安装软件</van-step>
-      <van-step @click="active=1">观看教程</van-step>
-      <van-step @click="active=3">上手抓包</van-step>
-      <van-step @click="active=4">上传IMEI</van-step>
+      <van-step @click="handleChangeActive(0)">安装软件</van-step>
+      <van-step @click="handleChangeActive(1)">观看教程</van-step>
+      <van-step @click="handleChangeActive(3)">上手抓包</van-step>
+      <van-step @click="handleChangeActive(4)">上传IMEI</van-step>
     </van-steps>
     <van-collapse v-model="active" accordion>
       <ApkPart :name="0" title="安装包集合"></ApkPart>
@@ -24,11 +24,14 @@
       <van-collapse-item :name="4" title="必看">
         <van-divider dashed>待写</van-divider>
         <ol>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+          <li>付费答疑:QQ:227384408</li>
+          <li>点击右下角[关于]，再点击[乐捐]</li>
+          <li>申明:付费的意义仅仅是为了避免不动脑就打扰</li>
+          <li>一次三元，三元解君愁！！！</li>
+          <li>每个人只用一个昵称，滥用昵称后果自负</li>
+          <li>长跑时间：6:00-8:30、16:00-22:30（其他时间跑步成绩无效）</li>
+          <li>长跑要求：男生2000（2米每秒-5.5米每秒）<br>女生1600（1.6米每秒-5.5米每秒）</li>
+          <li>南湖也可以用，不要再来问我了！很忙，谢谢！</li>
         </ol>
       </van-collapse-item>
     </van-collapse>
@@ -98,6 +101,7 @@ const textInfo = {
   ]
 }
 const {width, height} = useWindowSize();
+const handleChangeActive = (num: number) => active.value = num
 
 </script>
 <style lang="less" scoped>
