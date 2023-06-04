@@ -42,7 +42,7 @@ import PersonInfo from "../../../components/PersonInfo.vue";
 
 const store = useStore()  //store
 const nowTime = ref<number>(0) // 当前时间戳
-const loading = ref(false);// 加载中flag
+const loading = ref<boolean>(false);// 加载中flag
 const finished = ref(false); // 么有更多了flag
 const refreshing = ref<boolean>(false); // 下拉刷新flag
 
@@ -58,7 +58,7 @@ const selectInfo = ref<IPersonN>({
 const showCenter = ref<boolean>(false) //展示弹窗
 
 const page = ref<number>(0) //页码
-const limit = ref<number>(25) //每页数量
+const limit = ref<number>(20) //每页数量
 const list = ref<IUserItem[]>([]);// 循环渲染的列表
 //下滑加载更多
 const onLoad = async () => {

@@ -1,5 +1,5 @@
 // 计算时间段之差
-// 结束时间，开始时间，显示秒
+// 参数： 结束时间，开始时间，显示秒
 const timeToDur = (etime: number, stime = (new Date()).getTime(), sec = true) => {
     //总毫秒数
     const usedTime = etime - stime
@@ -20,6 +20,7 @@ const timeToDur = (etime: number, stime = (new Date()).getTime(), sec = true) =>
     }
 }
 
+// 跳转链接
 const handleGoLink = (url: string) => url.slice(0, 4) === 'http' ? window.location.href = url : window.location.hash = url
 
 const random = (min: any, max: any) => Math.floor(Math.random() * (max - min + 1) + min)

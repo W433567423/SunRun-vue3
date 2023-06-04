@@ -1,7 +1,7 @@
 export default {
     namespace: true,
     state: () => {
-        const userHomeCount = '18' // 首页徽标数字
+        const userHomeCount = '' // 首页徽标数字
         const userCount = '' // 总用户数
         return {
             userCount,

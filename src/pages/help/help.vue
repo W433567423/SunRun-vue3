@@ -77,7 +77,7 @@ import {handleGoLink} from "../../utils";
 import HelpPart from "./cpns/HelpPart.vue";
 import ApkPart from "./cpns/ApkPart.vue";
 
-const active = ref<number>(4);// 默认打开哪个教程
+const active = ref<number>(0);// 默认打开哪个教程
 const activeStep = computed(() => {
   switch (active.value) {
     case 0:

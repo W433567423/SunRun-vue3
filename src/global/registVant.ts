@@ -29,15 +29,16 @@ import {
     SwipeItem,
     Tabbar,
     TabbarItem,
-    Watermark
+    Watermark, RadioGroup, Radio, Picker, Barrage
 } from 'vant'
 
 const components = [
     Search, Cell, List, PullRefresh, Sticky, CellGroup,
     NoticeBar, Col, Row, Icon, Button, Tabbar, TabbarItem,
     Popup, Card, Watermark, Divider, BackTop, Collapse,
-    CollapseItem, Swipe, SwipeItem, Progress, Grid,
-    GridItem, Step, Steps, Form, Field, CellGroup
+    CollapseItem, Swipe, SwipeItem, Progress, Grid, Picker,
+    GridItem, Step, Steps, Form, Field, RadioGroup, Radio,
+    Barrage
 ]
 
 //全局注册常用组件
