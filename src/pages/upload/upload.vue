@@ -12,29 +12,31 @@
         <!--        作者-->
         <van-field
             v-model="formQuery.authorName"
+            :formatter="formatterTrim"
             :rules="[{ validator: validatorAuthor,trigger:'onChange' }]"
-            label="作者昵称"
-            name="authorName"
-            placeholder="输入本站作者的昵称"
-            required
+            autofocus
+            center clearable
+            colon
+            label="作者昵称" name="authorName" placeholder="输入本站作者的昵称" required
         />
         <!--        IMEI-->
         <van-field
             v-model="formQuery.IMEI"
+            :formatter="formatterTrim"
             :rules="[{ validator: (validatorIMEI as any) }] "
-            label="IMEI"
-            name="authorName"
-            placeholder="输入IMEI码"
-            required
+            center
+            clearable
+            colon
+            label="IMEI" name="authorName" placeholder="输入IMEI码" required
         />
         <!--        昵称-->
         <van-field
             v-model="formQuery.nickName"
+            :formatter="formatterTrim"
             :rules="[{ validator: validatorNickName  }] "
-            label="你的昵称"
-            name="nickName"
-            placeholder="输入你的昵称"
-            required
+            clearable
+            colon
+            label="你的昵称" maxlength="20" name="nickName" placeholder="输入你的昵称" required show-word-limit
         />
         <!--        跑步时间-->
         <PickerPart :columns="columnObj.runTime" :option="{name:'runTime',label:'跑步时间',defaultPicker:'晨跑'}"
@@ -86,10 +88,11 @@ const formQuery = ref<IUploadForm>({
 }) // 表单
 const images = [
   'https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/sunrun/images/%E7%BA%BA%E5%A4%A7%20%281%29.jpeg',
-  'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg'
+  'https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/sunrun/images/%E7%BA%BA%E5%A4%A7%20%282%29.jpeg',
+  'https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/sunrun/images/%E7%BA%BA%E5%A4%A7%20%283%29.jpeg',
 ]
 
-
+const formatterTrim = (val: string) => val.trim()
 const activeNames = ref<number>()
 const columnObj: IColumnObj = {
   runTime: [
@@ -109,11 +112,13 @@ const validatorAuthor = (val: string) => val === 'tutu' ? '' : '作者都不知�
 
 // 校验昵称合法性
 const validatorNickName = (val: string) => {
-  if (val.trim().includes('tu'))
-    return '不得使用此类包含敏感词的昵称'
-  else if (val.trim().includes('涂'))
-    return '不得使用此类包含敏感词的昵称'
-  else if (val.trim() === '')
+  const sensitiveWords = ['tu', '涂', '图', '傻', '逼', '共产', '纺大', '纺织大学',]
+  for (let i of sensitiveWords) {
+    if (val.trim().includes(i))
+      return '不得使用此类包含敏感词的昵称'
+
+  }
+  if (val.trim() === '')
     return '昵称必填且不得使用空格'
   else
     return ''
@@ -141,7 +146,10 @@ const changePickerOption = (val: IEmitElement) => {
 
 
 // 提交表单
-const handleUpload = () => alert(formQuery.value)
+const handleUpload = () => {
+
+  console.log(formQuery.value)
+}
 
 </script>
 <style lang="less" scoped>
@@ -154,6 +162,7 @@ const handleUpload = () => alert(formQuery.value)
 
   .swipe-img {
     width: 100%;
+    height: 240px;
   }
 }
 </style>
