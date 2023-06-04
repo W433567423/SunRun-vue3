@@ -1,5 +1,5 @@
 import axios from './request'
-import {IUserIMEIReqForm, IUserInfoReqForm, IUserLisReqForm, IUserListResData} from "./type";
+import {IPutForm, IResData, IUserIMEIReqForm, IUserInfoReqForm, IUserLisReqForm, IUserListResData} from "./type";
 
 
 //渲染列表
@@ -19,4 +19,8 @@ const getTotalUser = () => {
 const postValidatorIMEI = (params: string) => {
     return axios.post<IUserIMEIReqForm>('/data/validatorIMEI', {IMEI: params});
 }
-export {getList, getTotalUser, getPerson, postValidatorIMEI}
+// 上传表单
+const putForm = (params: IPutForm) => {
+    return axios.put<IResData>('/data/upload', params);
+}
+export {getList, getTotalUser, putForm, getPerson, postValidatorIMEI}

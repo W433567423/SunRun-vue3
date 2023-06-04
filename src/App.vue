@@ -10,7 +10,7 @@ const barList = [{to: '/home', icon: 'home-o', text: '主页', index: 0},
   {to: '/about', icon: 'manager-o', text: '关于', index: 3}] //底部导航栏数据列表
 const tabBarIndex = ref<number>(0) // 路由索引
 const homeUserCount = computed(() => store.getters.getHomeUserCount)
-
+store.commit('setLoadingTile', '玩命加载ing...')
 </script>
 
 <template>

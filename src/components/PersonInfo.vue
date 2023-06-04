@@ -5,8 +5,7 @@ interface Props {
   personItem: IPersonN
 }
 
-const props = withDefaults(defineProps<Props>(), {})
-console.log(props)
+withDefaults(defineProps<Props>(), {})
 </script>
 
 <template>

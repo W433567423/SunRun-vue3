@@ -14,11 +14,16 @@ for (const x in files) {
 // console.log(modulesObj)
 
 export default new Vuex.Store({
-    state: {
+    state: () => {
+        const loadingTitle = ``
         // 存放数据
+        return loadingTitle
     },
     mutations: {
         // 修改state里面的数据
+        setLoadingTile(state: any, val: string) {
+            state.loadingTitle = val
+        }
     },
     getters: {
         // 计算属性

@@ -30,6 +30,8 @@
     <van-popup v-model:show="showCenter" round style="overflow: hidden">
       <PersonInfo :person-item="selectInfo"></PersonInfo>
     </van-popup>
+    <!--    加载-->
+    <MyLoading v-if="showOverLay"/>
   </div>
 </template>
 <script lang="ts" setup>
@@ -39,6 +41,8 @@ import {IPersonN, IUserItem} from "../../../store/modules/user/type";
 import {getList, getPerson} from "../../../api";
 import {useStore} from "vuex";
 import PersonInfo from "../../../components/PersonInfo.vue";
+import {showConfirmDialog, showDialog} from "vant";
+import MyLoading from "../../../components/MyLoading.vue";
 
 const store = useStore()  //store
 const nowTime = ref<number>(0) // 当前时间戳
@@ -60,6 +64,8 @@ const showCenter = ref<boolean>(false) //展示弹窗
 const page = ref<number>(0) //页码
 const limit = ref<number>(20) //每页数量
 const list = ref<IUserItem[]>([]);// 循环渲染的列表
+const showOverLay = ref(false)
+
 //下滑加载更多
 const onLoad = async () => {
   console.log('下滑加载更多')
@@ -93,9 +99,37 @@ const onRefresh = async () => {
 };
 //打开详情框
 const handlePopupMessage = async (name: string) => {
-  const {data} = await getPerson(name)
-  selectInfo.value = {...data as any, nickName: name}
-  showCenter.value = true
+  store.commit('setLoadingTile', '正在查询该小可耐数据中ing...')
+  // TODO 处理查看详情时间(故意延时2s增强用户体验)
+  showOverLay.value = true
+  setTimeout(async () => {
+
+    const res = await getPerson(name)
+    showOverLay.value = false
+    console.log(res)
+    if (res.message === 'ok') {
+      //IMEI正常,展示详情框
+      selectInfo.value = {...res.data as any, nickName: name}
+      showCenter.value = true
+    } else {
+      //IMEI异常,展示弹窗
+      showConfirmDialog({
+        title: '警告',
+        message: `可能的原因有:\n${res.data}`,
+        showCancelButton: true,
+        showConfirmButton: true,
+        cancelButtonText: '爷就不',
+        confirmButtonText: '去上传IMEI',
+        messageAlign: "left"
+      }).then(() => window.location.hash = '/upload'
+      ).catch(() => showDialog({
+            title: '',
+            message: '皮？\n看我锤爆你!\n以雷霆击碎黑暗~',
+            messageAlign: "left"
+          })
+      )
+    }
+  }, 2500)
 }
 onMounted(() => {
   // 初始化时间

@@ -71,15 +71,20 @@
         </van-button>
       </div>
     </van-form>
+    <MyLoading v-if="showOverLay"/>
+
   </div>
 </template>
 <script lang="ts" setup>
 import {ref} from "vue";
 import {IColumnObj, IEmitElement, IUploadForm} from "./type"
-import {postValidatorIMEI} from "../../api"
+import {getPerson, postValidatorIMEI, putForm} from "../../api"
 import PickerPart from "./cpns/PickerPart.vue"
+import {showDialog, showNotify} from "vant";
+import MyLoading from "../../components/MyLoading.vue";
+import store from "../../store";
 
-
+const showOverLay = ref(false)
 const formQuery = ref<IUploadForm>({
   authorName: "",
   nickName: "",
@@ -147,11 +152,45 @@ const changePickerOption = (val: IEmitElement) => {
   val.stepCount && (formQuery.value.stepCount = (val.stepCount as number))
 }
 
-
 // 提交表单
-const handleUpload = () => {
+const handleUpload = async () => {
+  store.commit('setLoadingTile', '正在查询改昵称是否正在云跑步服务ing...')
+  showOverLay.value = true
+  setTimeout(async () => {
+    const res = await getPerson(formQuery.value.nickName)
+    if (res.message === 'ok') {
+      //   更新逻辑处理
+      showOverLay.value = false
+      showDialog({
+        title: '提醒',
+        message: '当前昵称已存在\n如是本人点击,确定进行更新信息\n恶意覆盖,后果自负',
+        theme: 'round-button', showCancelButton: true
+      }).then(async () => {
+        console.log('执迷不悟')
+        store.commit('setLoadingTile', '正在更新你的云跑步信息ing...')
+        showOverLay.value = true
+        // TODO 处理上传请求(故意延时2s增强用户体验)
+        setTimeout(async () => {
+          await putForm(formQuery.value)
+          showOverLay.value = false
+        }, 2500)
 
-  console.log(formQuery.value)
+      }).catch(() => undefined);
+
+    } else {
+      showOverLay.value = false
+      //   新增逻辑处理
+      await store.commit('setLoadingTile', `正在让你加入云跑步ing...`)
+      showOverLay.value = true
+
+      setTimeout(async () => {
+        const {data} = await putForm(formQuery.value)
+        showOverLay.value = false
+        showNotify({type: 'success', message: String(data)});
+        // showNotify({type: 'success', message: '新增成功!又多了一个小可耐呢'});
+      }, 2500)
+    }
+  }, 2500)
 }
 
 </script>
