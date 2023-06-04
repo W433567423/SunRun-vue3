@@ -13,7 +13,7 @@
         <van-field
             v-model="formQuery.authorName"
             :formatter="formatterTrim"
-            :rules="[{ validator: validatorAuthor,trigger:'onChange' }]"
+            :rules="[{ validator: validatorAuthor }]"
             autofocus
             center clearable
             colon
@@ -171,6 +171,7 @@ const handleUpload = async () => {
         showOverLay.value = true
         // TODO 处理上传请求(故意延时2s增强用户体验)
         setTimeout(async () => {
+          clearFrom()
           await putForm(formQuery.value)
           showOverLay.value = false
         }, 2500)
@@ -185,14 +186,27 @@ const handleUpload = async () => {
 
       setTimeout(async () => {
         const {data} = await putForm(formQuery.value)
+        clearFrom()
         showOverLay.value = false
         showNotify({type: 'success', message: String(data)});
         // showNotify({type: 'success', message: '新增成功!又多了一个小可耐呢'});
       }, 2500)
     }
-  }, 2500)
-}
 
+  }, 2500)
+
+}
+const clearFrom = () => {
+  // 重置参数
+  formQuery.value = {
+    authorName: "",
+    nickName: "",
+    IMEI: "",
+    runTime: "mor",
+    stepCount: 1450,
+    runSpeed: 650
+  }
+}
 </script>
 <style lang="less" scoped>
 .upload {

@@ -10,7 +10,6 @@ const emits = defineEmits(['changeOption'])
 const onConfirm = ({selectedOptions}: { selectedOptions: any }) => {
   showPicker.value = false;
   piker.value = selectedOptions[0].text
-  console.log(piker.value, 99999, selectedOptions[0], props.option.name)
   if (props.option.name === 'runTime')
     emits('changeOption', {runTime: selectedOptions[0].value})
   else if (props.option.name === 'speedTime')
