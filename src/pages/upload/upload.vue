@@ -39,7 +39,7 @@
             label="你的昵称" maxlength="20" name="nickName" placeholder="输入你的昵称" required show-word-limit
         />
         <!--        跑步时间-->
-        <PickerPart :columns="columnObj.runTime" :option="{name:'runTime',label:'跑步时间',defaultPicker:'晨跑'}"
+        <PickerPart :columns="columnObj.runTime" :option="{name:'runTime',label:'跑步时间',defaultPicker:'晨跑(7:14)'}"
                     :value="formQuery.runTime"
                     @change-option="changePickerOption"/>
 
@@ -52,11 +52,13 @@
               </div>
             </template>
             <!--            跑步用时-->
-            <PickerPart :columns="columnObj.speedTime" :option="{name:'speedTime',label:'跑步用时',defaultPicker:650}"
+            <PickerPart :columns="columnObj.speedTime"
+                        :option="{name:'speedTime',label:'跑步用时(/s)',defaultPicker:'650s(默认)'}"
                         :value="formQuery.runTime"
                         @change-option="changePickerOption"/>
             <!--            跑步步数-->
-            <PickerPart :columns="columnObj.stepCount" :option="{name:'stepCount',label:'跑步步数',defaultPicker:1450}"
+            <PickerPart :columns="columnObj.stepCount"
+                        :option="{name:'stepCount',label:'跑步步数(/步)',defaultPicker:'1450步(默认)'}"
                         :value="formQuery.runTime"
                         @change-option="changePickerOption"/>
           </van-collapse-item>
@@ -138,10 +140,11 @@ const validatorIMEI = async (val: string) => {
 
 // 切换事件
 const changePickerOption = (val: IEmitElement) => {
+  console.log()
   // 赋值表单选项
   val.runTime && (formQuery.value.runTime = val.runTime)
   val.speedTime && (formQuery.value.runSpeed = (val.speedTime as number))
-  val.runTime && (formQuery.value.stepCount = (val.stepCount as number))
+  val.stepCount && (formQuery.value.stepCount = (val.stepCount as number))
 }
 
 

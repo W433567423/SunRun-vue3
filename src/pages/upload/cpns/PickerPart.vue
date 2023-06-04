@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {ref} from "vue";
 import {IPickerProps} from "../type";
 
@@ -9,13 +9,14 @@ const emits = defineEmits(['changeOption'])
 // 选择晨/晚跑
 const onConfirm = ({selectedOptions}: { selectedOptions: any }) => {
   showPicker.value = false;
-  piker.value = selectedOptions[0].value
+  piker.value = selectedOptions[0].text
+  console.log(piker.value, 99999, selectedOptions[0], props.option.name)
   if (props.option.name === 'runTime')
-    emits('changeOption', {runTime: piker.value === '晨跑' ? 'mor' : 'eve'})
+    emits('changeOption', {runTime: selectedOptions[0].value})
   else if (props.option.name === 'speedTime')
-    emits('changeOption', {speedTime: piker.value})
+    emits('changeOption', {speedTime: selectedOptions[0].value})
   else if (props.option.name === 'stepCount')
-    emits('changeOption', {stepCount: piker.value})
+    emits('changeOption', {stepCount: selectedOptions[0].value})
 };
 </script>
 
@@ -24,14 +25,14 @@ const onConfirm = ({selectedOptions}: { selectedOptions: any }) => {
   <div>
     <van-field
         v-model="piker"
-        readonly
-        is-link
-        :required="false"
         :label="option.label"
         :placeholder="`选择${option.label}`"
+        :required="false"
+        is-link
+        readonly
         @click="showPicker = true"
     />
-    <van-popup v-model:show="showPicker" round position="bottom">
+    <van-popup v-model:show="showPicker" position="bottom" round>
       <van-picker
           :columns="columns"
           @cancel="showPicker = false"
@@ -41,6 +42,6 @@ const onConfirm = ({selectedOptions}: { selectedOptions: any }) => {
   </div>
 </template>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 
 </style>

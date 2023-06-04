@@ -11,7 +11,7 @@ interface IUploadForm {
 
 interface IPickerOption {
     label: string
-    defaultPicker: string | number
+    defaultPicker: string
     name: string
 }
 
