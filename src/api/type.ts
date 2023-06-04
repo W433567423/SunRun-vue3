@@ -26,4 +26,13 @@ interface IUserListResData {
     status: number
 }
 
-export type {IUserListResData, IUserLisReqForm, IResData, IUserInfoReqForm, IUserIMEIReqForm}
+interface IPutForm {
+    "IMEI": string,
+    "authorName": string,
+    "nickName": string,
+    "runSpeed": number,
+    "runTime": string,
+    "stepCount": number
+}
+
+export type {IUserListResData, IPutForm, IUserLisReqForm, IResData, IUserInfoReqForm, IUserIMEIReqForm}

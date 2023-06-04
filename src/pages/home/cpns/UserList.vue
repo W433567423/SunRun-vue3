@@ -39,6 +39,7 @@ import {IPersonN, IUserItem} from "../../../store/modules/user/type";
 import {getList, getPerson} from "../../../api";
 import {useStore} from "vuex";
 import PersonInfo from "../../../components/PersonInfo.vue";
+import {showConfirmDialog, showDialog} from "vant";
 
 const store = useStore()  //store
 const nowTime = ref<number>(0) // 当前时间戳
@@ -93,9 +94,30 @@ const onRefresh = async () => {
 };
 //打开详情框
 const handlePopupMessage = async (name: string) => {
-  const {data} = await getPerson(name)
-  selectInfo.value = {...data as any, nickName: name}
-  showCenter.value = true
+  const res = await getPerson(name)
+  console.log(res)
+  if (res.message === 'ok') {
+    //IMEI正常,展示详情框
+    selectInfo.value = {...res.data as any, nickName: name}
+    showCenter.value = true
+  } else {
+    //IMEI异常,展示弹窗
+    showConfirmDialog({
+      title: '警告',
+      message: `可能的原因有:\n${res.data}`,
+      showCancelButton: true,
+      showConfirmButton: true,
+      cancelButtonText: '爷就不',
+      confirmButtonText: '去上传IMEI',
+      messageAlign: "left"
+    }).then(() => window.location.hash = '/upload'
+    ).catch(() => showDialog({
+          title: '',
+          message: '皮？\n看我锤爆你!\n以雷霆击碎黑暗~',
+          messageAlign: "left"
+        })
+    )
+  }
 }
 onMounted(() => {
   // 初始化时间

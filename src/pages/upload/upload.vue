@@ -76,14 +76,14 @@
 <script lang="ts" setup>
 import {ref} from "vue";
 import {IColumnObj, IEmitElement, IUploadForm} from "./type"
-import {postValidatorIMEI} from "../../api"
+import {getPerson, postValidatorIMEI} from "../../api"
 import PickerPart from "./cpns/PickerPart.vue"
 
 
 const formQuery = ref<IUploadForm>({
-  authorName: "",
-  nickName: "",
-  IMEI: "",
+  authorName: "tutu",
+  nickName: "测试",
+  IMEI: "87fc09d1e8e94b3880222b8488f4cd85",
   runTime: "mor",
   stepCount: 1450,
   runSpeed: 650
@@ -147,11 +147,17 @@ const changePickerOption = (val: IEmitElement) => {
   val.stepCount && (formQuery.value.stepCount = (val.stepCount as number))
 }
 
-
 // 提交表单
-const handleUpload = () => {
-
-  console.log(formQuery.value)
+const handleUpload = async () => {
+  // const res = await putForm(formQuery.value)
+  const res = await getPerson(formQuery.value.nickName)
+  if (res.message === 'ok') {
+    //   更新逻辑处理
+    console.log(1)
+  } else {
+    //   新增逻辑处理
+    console.log(2)
+  }
 }
 
 </script>
