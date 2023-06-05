@@ -134,6 +134,9 @@ const handlePopupMessage = async (name: string) => {
 onMounted(() => {
   // 初始化时间
   nowTime.value = Number((new Date()).getTime())
+  //每秒刷新
+  window.setInterval(() => nowTime.value += 1000, 1000,)
+
 })
 </script>
 <style lang="less">

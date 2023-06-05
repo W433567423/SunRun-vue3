@@ -6,6 +6,7 @@ const routes: RouteRecordRaw[] = [{path: '/', redirect: '/home'}]
 for (const x in files) {
     routes.push((files[x] as any).default)
 }
+routes.push({path: '/person', component: () => import('../pages/home/person.vue')})
 const router = createRouter({
     history: createWebHashHistory(),
     routes

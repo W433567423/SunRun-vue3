@@ -10,7 +10,7 @@ interface ResultData<T = any> extends IResData {
     data?: T;
 }
 
-// const URL = 'https://asr.wtututu.top/api/sunrun'
+// const URL = 'https://asr.wtututu.top/sunrun'
 // const URL = 'http://127.0.0.1:8000/sunRun'
 const URL = 'http://192.168.2.155:8000/sunRun'
 

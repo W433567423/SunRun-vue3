@@ -1,11 +1,12 @@
 <template>
   <div class="about">这是about页面
+    <h2>该页面还没写</h2>
   </div>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 </script>
-<style scoped lang="less">
-  .about {
-    color: red;
-  }
+<style lang="less" scoped>
+.about {
+  color: red;
+}
 </style>
