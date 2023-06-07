@@ -16,7 +16,7 @@ withDefaults(defineProps<IApkProps>(), {})
         <img alt="" class="apk-img" src="https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/sunrun/HttpCanary.jpg">
         <text class="apk-text">HttpCanary</text>
       </van-grid-item>
-      <van-grid-item rl="https://apps.apple.com/cn/app/stream/id1312141691">
+      <van-grid-item url="https://apps.apple.com/cn/app/stream/id1312141691">
         <img alt="" class="apk-img"
              src="https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/sunrun/Stream.jpg">
         <text class="apk-text">Stream</text>
@@ -25,7 +25,7 @@ withDefaults(defineProps<IApkProps>(), {})
         <img alt="" class="apk-img" src="https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/sunrun/sunrun.jpg">
         <text class="apk-text">阳光体育服务平台</text>
       </van-grid-item>
-      <van-grid-item rl="https://wwln.lanzoul.com/izJPX0y07sej">
+      <van-grid-item url="https://wwln.lanzoul.com/izJPX0y07sej">
         <img alt="" class="apk-img"
              src="https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/sunrun/sunrun.jpg">
         <text class="apk-text">阳光体育服务平台</text>

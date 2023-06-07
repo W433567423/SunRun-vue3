@@ -60,7 +60,7 @@ const selectInfo = ref<IPersonN>({
   listValue: []
 }) //展示弹窗
 const showCenter = ref<boolean>(false) //展示弹窗
-
+let timer = 0
 const page = ref<number>(0) //页码
 const limit = ref<number>(20) //每页数量
 const list = ref<IUserItem[]>([]);// 循环渲染的列表
@@ -85,6 +85,14 @@ const onLoad = async () => {
 // 下拉刷新
 const onRefresh = async () => {
   console.log('下拉刷新')
+
+  timer && window.clearInterval(timer)
+  // 初始化时间
+  nowTime.value = Number((new Date()).getTime())
+  //每秒刷新
+  timer = window.setInterval(() => nowTime.value += 1000, 1000,)
+
+
   page.value = 0
   const res: any = await getList({
     page: page.value,
@@ -135,7 +143,7 @@ onMounted(() => {
   // 初始化时间
   nowTime.value = Number((new Date()).getTime())
   //每秒刷新
-  window.setInterval(() => nowTime.value += 1000, 1000,)
+  timer = window.setInterval(() => nowTime.value += 1000, 1000,)
 
 })
 </script>
