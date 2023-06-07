@@ -15,7 +15,7 @@
                     clickable
                     @click.stop="handlePopupMessage(item.nickName)">
             <template #right-icon>
-              <van-button :to="`/person?userNick=${item.nickName}`" class="info-btn" size="mini" type="primary">
+              <van-button :to="`/person?nickName=${item.nickName}`" class="info-btn" size="mini" type="primary">
                 详情
                 <van-icon name="arrow"></van-icon>
               </van-button>

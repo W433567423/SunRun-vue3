@@ -41,7 +41,7 @@ const TotalCount = computed(() => store.state.user.userCount) // 总计算人数
 let timer = 0 //定时器
 // 搜索框事件
 const handleSearch = () => {
-  console.log('handleSearch')
+  alert('该功能待写')
 }
 
 
