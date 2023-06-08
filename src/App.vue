@@ -16,7 +16,8 @@ const homeUserCount = computed(() => store.getters.getHomeUserCount)
 <template>
   <!--黏性区域-->
   <van-sticky>
-    <header>{{ store.state.headerTitle }}
+    <header>
+      <text class="header-title">{{ store.state.headerTitle }}</text>
     </header>
   </van-sticky>
   <div class="app">
@@ -46,6 +47,22 @@ header {
   font-size: 18px;
   background-color: #fff;
   border-bottom: 1px #f7f7f7 solid;
+
+  .header-title {
+    animation: bounce 2s infinite; /*设置动画*/
+  }
+}
+
+@-webkit-keyframes bounce { /*创建动画*/
+  0%, 100%, 20%, 50%, 80% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-12px);
+  }
+  60% {
+    transform: translateY(-6px);
+  }
 }
 
 .app {
