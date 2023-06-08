@@ -38,10 +38,10 @@
 import {timeToDur} from "../../../utils";
 import {onMounted, ref} from "vue";
 import {IPersonN, IUserItem} from "../../../store/modules/user/type";
-import {getList, getPerson} from "../../../api";
+import {getList, getPerson, searchList} from "../../../api";
 import {useStore} from "vuex";
 import PersonInfo from "../../../components/PersonInfo.vue";
-import {showConfirmDialog, showDialog} from "vant";
+import {showConfirmDialog, showDialog, showLoadingToast} from "vant";
 import MyLoading from "../../../components/MyLoading.vue";
 
 const store = useStore()  //store
@@ -138,6 +138,17 @@ const handlePopupMessage = async (name: string) => {
     }
   }, 2500)
 }
+
+const handleSearch = async (e: string) => {
+  const loadingToast = showLoadingToast('加载中...')
+  const res: any = await searchList(e)
+  loadingToast.close()
+  list.value = res.data
+  store.commit('setUserHomeCount', list.value.length)
+}
+
+defineExpose({handleSearch, onRefresh})
+
 onMounted(() => {
   // 初始化时间
   nowTime.value = Number((new Date()).getTime())

@@ -21,7 +21,7 @@
       </van-row>
     </van-sticky>
     <!--列表区域-->
-    <UserList></UserList>
+    <UserList ref="userListRef"></UserList>
 
   </div>
 </template>
@@ -39,9 +39,13 @@ const searchQuery = ref(''); // 搜索关键词
 const nowTime = ref<number>(0) // 当前时间戳
 const TotalCount = computed(() => store.state.user.userCount) // 总计算人数
 let timer = 0 //定时器
+const userListRef = ref()
 // 搜索框事件
 const handleSearch = () => {
-  alert('该功能待写')
+  // searchList(searchQuery.value)
+  if (searchQuery.value.trim())
+    userListRef.value.handleSearch(searchQuery.value)
+  else userListRef.value.onRefresh()
 }
 
 

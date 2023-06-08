@@ -6,13 +6,9 @@ import {IPutForm, IResData, IUserIMEIReqForm, IUserLisReqForm} from "./type";
 const getList = (params: IUserLisReqForm) => {
     return axios.get<IResData>('/data/list', params);
 }
-// 获取用户个人信息
-const getPerson = (params: string) => {
-    return axios.get<IResData>('/user/userDetail', {nickName: params});
-}
-// 获取总使用人数
-const getTotalUser = () => {
-    return axios.get('/user/totalUser',);
+//查询列表
+const searchList = (params: string) => {
+    return axios.get<IResData>('/data/search', {nickName: params});
 }
 
 // 校验IMEI
@@ -23,4 +19,14 @@ const postValidatorIMEI = (params: string) => {
 const putForm = (params: IPutForm) => {
     return axios.put<IResData>('/data/upload', params);
 }
-export {getList, getTotalUser, putForm, getPerson, postValidatorIMEI}
+
+
+// 获取用户个人信息
+const getPerson = (params: string) => {
+    return axios.get<IResData>('/user/userDetail', {nickName: params});
+}
+// 获取总使用人数
+const getTotalUser = () => {
+    return axios.get('/user/totalUser',);
+}
+export {getList, getTotalUser, putForm, searchList, getPerson, postValidatorIMEI}
