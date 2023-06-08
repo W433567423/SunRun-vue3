@@ -15,14 +15,19 @@ for (const x in files) {
 
 export default new Vuex.Store({
     state: () => {
-        const loadingTitle = ``
+        const loadingTitle = '玩命加载ing...'
+        const headerTitle = '主页'
         // 存放数据
-        return loadingTitle
+        return {loadingTitle, headerTitle}
     },
     mutations: {
         // 修改state里面的数据
-        setLoadingTile(state: any, val: string) {
+        setLoadingTitle(state: any, val: string) {
             state.loadingTitle = val
+        },
+        // 修改state里面的数据
+        setHeaderTitle(state: any, val: string) {
+            state.headerTitle = val
         }
     },
     getters: {

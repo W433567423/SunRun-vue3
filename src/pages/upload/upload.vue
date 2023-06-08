@@ -76,14 +76,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {ref} from "vue";
+import {onBeforeMount, ref} from "vue";
 import {IColumnObj, IEmitElement, IUploadForm} from "./type"
 import {getPerson, postValidatorIMEI, putForm} from "../../api"
 import PickerPart from "./cpns/PickerPart.vue"
 import {showDialog, showNotify} from "vant";
 import MyLoading from "../../components/MyLoading.vue";
-import store from "../../store";
+import {useStore} from "vuex";
 
+const store = useStore()
 const showOverLay = ref(false)
 const formQuery = ref<IUploadForm>({
   authorName: "",
@@ -154,7 +155,7 @@ const changePickerOption = (val: IEmitElement) => {
 
 // 提交表单
 const handleUpload = async () => {
-  store.commit('setLoadingTile', '正在查询改昵称是否正在云跑步服务ing...')
+  store.commit('setLoadingTitle', '正在查询改昵称是否正在云跑步服务ing...')
   showOverLay.value = true
   setTimeout(async () => {
     const res = await getPerson(formQuery.value.nickName)
@@ -167,7 +168,7 @@ const handleUpload = async () => {
         theme: 'round-button', showCancelButton: true
       }).then(async () => {
         console.log('执迷不悟')
-        store.commit('setLoadingTile', '正在更新你的云跑步信息ing...')
+        store.commit('setLoadingTitle', '正在更新你的云跑步信息ing...')
         showOverLay.value = true
         // TODO 处理上传请求(故意延时2s增强用户体验)
         setTimeout(async () => {
@@ -181,7 +182,7 @@ const handleUpload = async () => {
     } else {
       showOverLay.value = false
       //   新增逻辑处理
-      await store.commit('setLoadingTile', `正在让你加入云跑步ing...`)
+      await store.commit('setLoadingTitle', `正在让你加入云跑步ing...`)
       showOverLay.value = true
 
       setTimeout(async () => {
@@ -207,6 +208,7 @@ const clearFrom = () => {
     runSpeed: 650
   }
 }
+onBeforeMount(() => store.commit('setHeaderTitle', '上传IMEI'))
 </script>
 <style lang="less" scoped>
 .upload {

@@ -69,13 +69,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {computed, ref} from "vue"
+import {computed, onBeforeMount, ref} from "vue"
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {useWindowSize} from '@vant/use';
 import {handleGoLink} from "../../utils";
 import HelpPart from "./cpns/HelpPart.vue";
 import ApkPart from "./cpns/ApkPart.vue";
+import {useStore} from "vuex";
 
 const active = ref<number>(0);// 默认打开哪个教程
 const activeStep = computed(() => {
@@ -134,12 +135,12 @@ const textInfo = {
 const {width, height} = useWindowSize();
 const handleChangeActive = (num: number) => active.value = num
 
+onBeforeMount(() => useStore().commit('setHeaderTitle', '帮助'))
 </script>
 <style lang="less" scoped>
 .help {
   width: 100%;
   overflow-y: auto;
-  height: 1000px;
 
   // 第三方链接
   .help-link {

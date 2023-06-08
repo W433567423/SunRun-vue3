@@ -4,6 +4,7 @@ import {useRoute} from "vue-router";
 import {getPerson} from "../../api";
 import {IUserRunRecord} from "./type";
 import MyLoading from "../../components/MyLoading.vue";
+import store from "../../store";
 
 const route = useRoute()
 const isShowLoading = ref(false)
@@ -30,6 +31,7 @@ const handleFlashGrade = async () => {
 }
 
 onBeforeMount(async () => {
+  store.commit('setHeaderTitle', '个人跑步详情')
   await handleFlashGrade()
 })
 </script>

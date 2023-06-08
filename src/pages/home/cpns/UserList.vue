@@ -106,7 +106,7 @@ const onRefresh = async () => {
 };
 //打开详情框
 const handlePopupMessage = async (name: string) => {
-  store.commit('setLoadingTile', '正在查询该小可耐数据中ing...')
+  store.commit('setLoadingTitle', '正在查询该小可耐数据中ing...')
   // TODO 处理查看详情时间(故意延时2s增强用户体验)
   showOverLay.value = true
   setTimeout(async () => {
@@ -159,7 +159,8 @@ onMounted(() => {
 </script>
 <style lang="less">
 .user-list {
-  height: calc(100vh - 180px);
+  height: calc(100vh - 160px);
+  background-color: #fff;
   //overflow: hidden;
   .info-btn {
     margin-left: 12px;

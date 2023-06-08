@@ -51,6 +51,7 @@ const handleSearch = () => {
 
 // 立即事件
 onMounted(async () => {
+  store.commit('setHeaderTitle', '主页')
   // 初始化时间
   nowTime.value = Number((new Date()).getTime())
   //每秒刷新
@@ -67,13 +68,19 @@ onBeforeUnmount(() => {
 <style lang="less" scoped>
 .home {
   overflow-y: auto;
-  max-height: 100%;
+  //搜索
+  .search-box {
+    background-color: #fff;
+    width: 100%;
+    z-index: 9;
+  }
 
   // 顶部展示
   .top-row-box {
     display: flex;
     justify-content: space-around;
     background-color: #fff;
+    //background-color: red;
     padding: 4px 0;
 
     .top-col-box {
@@ -94,21 +101,10 @@ onBeforeUnmount(() => {
     }
   }
 
-  //搜索
-  .search-box {
-    //background-color: red;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 9;
-  }
 
   .info-btn {
     margin-left: 12px;
   }
 
-  .list {
-    border: 1px red;
-  }
 }
 </style>
