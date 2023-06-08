@@ -17,7 +17,7 @@ const userinfo = ref<IUserRunRecord>({
 })
 const activeTab = ref<number>(0)
 
-onBeforeMount(async () => {
+const handleFlashGrade = async () => {
   isShowLoading.value = true
   const res = await getPerson(route.query.nickName as string)
   isShowLoading.value = false
@@ -27,7 +27,10 @@ onBeforeMount(async () => {
     alert('该用户IMEI已失效，即将跳转主页')
     window.location.hash = '/home'
   }
+}
 
+onBeforeMount(async () => {
+  await handleFlashGrade()
 })
 </script>
 
@@ -43,8 +46,8 @@ onBeforeMount(async () => {
         <text>晨跑次数</text>
       </div>
       <div class="search-grade">
-        <div>查询成绩</div>
-        <van-button class="search-button"><span class="iconfont icon-flash">&#xe644;</span></van-button>
+        <van-button class="search-button" @click="handleFlashGrade"><span class="iconfont icon-flash">&#xe644;</span>
+        </van-button>
         <div>{{ route.query.nickName }}</div>
       </div>
       <div class="grade-area">
@@ -130,7 +133,7 @@ onBeforeMount(async () => {
     .search-grade {
 
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
       flex-direction: column;
 
