@@ -92,7 +92,6 @@ const onRefresh = async () => {
   //每秒刷新
   timer = window.setInterval(() => nowTime.value += 1000, 1000,)
 
-
   page.value = 0
   const res: any = await getList({
     page: page.value,

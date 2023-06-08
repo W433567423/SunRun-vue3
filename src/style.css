@@ -52,3 +52,27 @@ body {
 .red-text {
     color: red
 }
+
+/*字体图标*/
+@font-face {
+    font-family: 'iconfont';
+    src: url('./asset/iconfont.woff2?t=1686190157693') format('woff2'),
+    url('asset/iconfont.woff?t=1686190157693') format('woff'),
+    url('asset/iconfont.ttf?t=1686190157693') format('truetype');
+}
+
+/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+/*@font-face {*/
+/*    font-family: 'iconfont';  !* Project id 4110597 *!*/
+/*    src: url('//at.alicdn.com/t/c/font_4110597_h67hetvex1c.woff2?t=1686191458273') format('woff2'),*/
+/*    url('//at.alicdn.com/t/c/font_4110597_h67hetvex1c.woff?t=1686191458273') format('woff'),*/
+/*    url('//at.alicdn.com/t/c/font_4110597_h67hetvex1c.ttf?t=1686191458273') format('truetype');*/
+/*}*/
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

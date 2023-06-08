@@ -1,5 +1,3 @@
-import {IUserItem} from "../store/modules/user/type";
-
 interface IUserLisReqForm {
     page: number;
     limit: number;
@@ -19,13 +17,6 @@ interface IResData {
     code: number
 }
 
-interface IUserListResData {
-    count: number
-    data: IUserItem[]
-    message: string
-    status: number
-}
-
 interface IPutForm {
     "IMEI": string,
     "authorName": string,
@@ -35,4 +26,4 @@ interface IPutForm {
     "stepCount": number
 }
 
-export type {IUserListResData, IPutForm, IUserLisReqForm, IResData, IUserInfoReqForm, IUserIMEIReqForm}
+export type {IPutForm, IUserLisReqForm, IResData, IUserInfoReqForm, IUserIMEIReqForm}

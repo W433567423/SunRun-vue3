@@ -4,7 +4,7 @@ import {useStore} from 'vuex'
 
 const store = useStore()
 
-alert('本网站正在迭代新版，所以可能有许多bug')
+alert('6.4-6.8的数据有问题，会出现一些异常记录')
 const barList = [{to: '/home', icon: 'home-o', text: '主页', index: 0},
   {to: '/upload', icon: 'upgrade', text: '上传', index: 1},
   {to: '/help', icon: 'question-o', text: '帮助', index: 2},

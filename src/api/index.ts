@@ -1,14 +1,14 @@
 import axios from './request'
-import {IPutForm, IResData, IUserIMEIReqForm, IUserInfoReqForm, IUserLisReqForm, IUserListResData} from "./type";
+import {IPutForm, IResData, IUserIMEIReqForm, IUserLisReqForm} from "./type";
 
 
 //渲染列表
 const getList = (params: IUserLisReqForm) => {
-    return axios.get<IUserListResData>('/data/list', params);
+    return axios.get<IResData>('/data/list', params);
 }
 // 获取用户个人信息
 const getPerson = (params: string) => {
-    return axios.get<IUserInfoReqForm>('/user/userDetail', {nickName: params});
+    return axios.get<IResData>('/user/userDetail', {nickName: params});
 }
 // 获取总使用人数
 const getTotalUser = () => {
