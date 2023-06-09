@@ -1,18 +1,33 @@
-# Vue 3 + TypeScript + Vite
+# sunRun_vue3
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 简介
 
-## Recommended IDE Setup
+本项目是tutuのsunRun的前端部分(vue3重构版本)
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- 开发时间2023.5-至今
+- [本项目](https://github.com/W433567423/sunrun-vue3)地址
+- [旧项目](https://github.com/W433567423/SunRun)地址
 
-## Type Support For `.vue` Imports in TS
+## 技术选型
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+- 语言:[TypeScript](https://www.typescriptlang.org/)
+- 框架:[Vue3](https://cn.vuejs.org/)+[Vuex](https://vuex.vuejs.org/)
+- UI组件库: [Vant 4](https://vant-contrib.gitee.io/vant/)
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## 编辑器
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+- [IntelliJ IDEA 2023.1](https://www.jetbrains.com/zh-cn/idea/download/)(推荐)
+- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)  + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+
+## 参与项目
+
+- 依赖安装`npm i`
+- 运行项目`npm run dev`
+- 项目打包`npm run build`
+
+- ## 食用方法
+
+- 实现原理:
+    1. 从手机端抓包获取阳光体育服务平台等的IMEIcode码
+    2. 在[tutuのSunRun](https://run.wtututu.top)上传IMEI,将数据保存数据库
+    3. 服务器定时执行脚本进行云跑步

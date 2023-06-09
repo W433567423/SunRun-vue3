@@ -172,8 +172,8 @@ const handleUpload = async () => {
         showOverLay.value = true
         // TODO 处理上传请求(故意延时2s增强用户体验)
         setTimeout(async () => {
-          clearFrom()
           await putForm(formQuery.value)
+          clearFrom()
           showOverLay.value = false
         }, 2500)
 
