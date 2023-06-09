@@ -73,11 +73,11 @@ const handleClickListItem = (i: string) => {
       showShare.value = true
       break
     case 'share':
-      window.navigator.clipboard.writeText('https://run.wtututu.top')
-      showSuccessToast({
+      window.navigator.clipboard.writeText('https://run.wtututu.top').then(() => showSuccessToast({
         message: '链接已复制到剪切板了\n快分享给有需要的宝叭！',
         iconSize: '64px', duration: 3600
-      })
+      }))
+
       break
   }
 }
