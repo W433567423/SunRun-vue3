@@ -28,6 +28,7 @@ import {
     RadioGroup,
     Row,
     Search,
+    ShareSheet,
     Step,
     Steps,
     Sticky,
@@ -37,7 +38,7 @@ import {
     Tabbar,
     TabbarItem,
     Tabs,
-    Watermark
+    Watermark,
 } from 'vant'
 
 const components = [
@@ -46,7 +47,7 @@ const components = [
     Popup, Card, Watermark, Divider, BackTop, Collapse,
     CollapseItem, Swipe, SwipeItem, Progress, Grid, Picker,
     GridItem, Step, Steps, Form, Field, RadioGroup, Radio,
-    Barrage, Loading, Overlay, Tab, Tabs
+    Barrage, Loading, Overlay, Tab, Tabs, ShareSheet,
 ]
 
 //全局注册常用组件
