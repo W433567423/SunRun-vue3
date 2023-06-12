@@ -10,17 +10,33 @@
                 @load="onLoad"
       >
         <van-cell-group title="昵称">
-          <van-cell v-for="item in list" :key="item.nickName" :title="item.nickName"
-                    :value="timeToDur(Number(item.updatedTime)+ 86400000 * 7,nowTime)"
-                    clickable
-                    @click.stop="handlePopupMessage(item.nickName)">
-            <template #right-icon>
-              <van-button :to="`/person?nickName=${item.nickName}`" class="info-btn" size="mini" type="primary">
-                详情
-                <van-icon name="arrow"></van-icon>
-              </van-button>
-            </template>
-          </van-cell>
+          <template v-for="item in list" :key="item.nickName">
+            <van-cell v-if="Number(item.updatedTime)+ 86400000 * 7-nowTime>0"
+                      :title="item.nickName"
+                      :value="timeToDur(Number(item.updatedTime)+ 86400000 * 7,nowTime)"
+                      clickable
+                      @click.stop="handlePopupMessage(item.nickName)">
+              <template #right-icon>
+                <van-button :to="`/person?nickName=${item.nickName}`" class="info-btn" size="mini" type="primary">
+                  详情
+                  <van-icon name="arrow"></van-icon>
+                </van-button>
+              </template>
+            </van-cell>
+            <van-cell v-else
+                      :title="item.nickName"
+                      clickable
+                      value="已过期"
+                      @click.stop="handlePopupMessage(item.nickName)">
+              <template #right-icon>
+                <van-button :to="`/person?nickName=${item.nickName}`" class="info-btn" size="mini" type="primary">
+                  详情
+                  <van-icon name="arrow"></van-icon>
+                </van-button>
+              </template>
+            </van-cell>
+
+          </template>
         </van-cell-group>
         <!--          回到顶部-->
         <van-back-top bottom="10vh" right="20vw"/>
