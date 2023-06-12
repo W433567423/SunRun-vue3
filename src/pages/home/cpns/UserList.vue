@@ -54,7 +54,7 @@
 import {timeToDur} from "../../../utils";
 import {onMounted, ref} from "vue";
 import {IPersonN, IUserItem} from "../../../store/modules/user/type";
-import {getList, getPerson, searchList} from "../../../api";
+import {getList, getRunInfoValid, searchList} from "../../../api";
 import {useStore} from "vuex";
 import PersonInfo from "../../../components/PersonInfo.vue";
 import {showConfirmDialog, showDialog, showLoadingToast} from "vant";
@@ -127,7 +127,7 @@ const handlePopupMessage = async (name: string) => {
   showOverLay.value = true
   setTimeout(async () => {
 
-    const res = await getPerson(name)
+    const res = await getRunInfoValid(name)
     showOverLay.value = false
     console.log(res)
     if (res.message === 'ok') {

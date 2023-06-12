@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import {onBeforeMount, ref} from "vue";
+import {onBeforeMount, ref, watch} from "vue";
 import {useRoute} from "vue-router";
-import {getPerson} from "../../api";
-import {IUserRunRecord} from "./type";
+import {IRunRecordInvalid, IRunRecordValid} from "./type";
 import MyLoading from "../../components/MyLoading.vue";
 import store from "../../store";
+import {getRunInfoInvalid, getRunInfoValid} from "../../api";
 
 const route = useRoute()
 const isShowLoading = ref(false)
-const userinfo = ref<IUserRunRecord>({
+const runInfoValid = ref<IRunRecordValid>({
   AllCount: 0, LastPage: false, RaceMNums: 0, RaceNums: 0,
   Success: false, listValue: [{
     AvaLengths: 0, CostDistance: 0,
@@ -16,23 +16,70 @@ const userinfo = ref<IUserRunRecord>({
     ResultHour: 0, Speed: 0, StepNum: 0
   }]
 })
+const runInfoInvalid = ref<IRunRecordInvalid>({
+  AllCount: 0, LastPage: false, RaceMNums: 0, RaceNums: 0,
+  Success: false, listInValue: [{
+    AvaLengths: 0, CostDistance: 0,
+    CostTime: '', NoCountReason: null, ResultDate: '',
+    ResultHour: 0, Speed: 0, StepNum: 0
+  }]
+})
 const activeTab = ref<number>(0)
 
-const handleFlashGrade = async () => {
-  isShowLoading.value = true
-  const res = await getPerson(route.query.nickName as string)
-  isShowLoading.value = false
+watch(() => activeTab.value, async n => {
+  setTimeout(async () => {
+    isShowLoading.value = true
+    switch (n) {
+      case 0:
+        await handleFlashValidGrade()
+        break
+      case 1:
+        await handleFlashInvalidGrade()
+        break
+    }
+    isShowLoading.value = false
+  })
+}, {immediate: true})
+
+// 请求有效地跑步信息
+const handleFlashValidGrade = async () => {
+  runInfoValid.value.listValue = []
+  const res = await getRunInfoValid(route.query.nickName as string)
   if (res.message === 'ok')
-    userinfo.value = (res.data as any as IUserRunRecord)
+    runInfoValid.value = (res.data as any as IRunRecordValid)
   else {
     alert('该用户IMEI已失效，即将跳转主页')
     window.location.hash = '/home'
   }
 }
 
+// 请求有效地跑步信息
+const handleFlashInvalidGrade = async () => {
+  runInfoInvalid.value.listInValue = []
+  const res = await getRunInfoInvalid(route.query.nickName as string)
+  runInfoInvalid.value = (res.data as any as IRunRecordInvalid)
+}
+
+// 【同步】请求跑步信息(全部)
+const handleFlashGrade = async (index: number) => {
+  isShowLoading.value = true
+  switch (index) {
+    case 0:
+      await handleFlashValidGrade()
+      break
+    case 1:
+      await handleFlashInvalidGrade()
+      break
+  }
+  isShowLoading.value = false
+}
+
 onBeforeMount(async () => {
   store.commit('setHeaderTitle', '个人跑步详情')
-  await handleFlashGrade()
+  // isShowLoading.value = true
+  // await handleFlashValidGrade(false)
+  // // await handleFlashInvalidGrade(false)
+  // isShowLoading.value = false
 })
 </script>
 
@@ -43,18 +90,19 @@ onBeforeMount(async () => {
       <div class="grade-area">
         <div class="run-icon-box">
           <span class="iconfont icon-run">&#xe68d;</span>
-          <text class="run-icon-text">{{ userinfo.RaceMNums }}</text>
+          <text class="run-icon-text">{{ runInfoValid.RaceMNums }}</text>
         </div>
         <text>晨跑次数</text>
       </div>
       <div class="search-grade">
-        <van-button class="search-button" @click="handleFlashGrade"><span class="iconfont icon-flash">&#xe644;</span>
+        <van-button class="search-button" @click="handleFlashGrade(activeTab)"><span
+            class="iconfont icon-flash">&#xe644;</span>
         </van-button>
         <div>{{ route.query.nickName }}</div>
       </div>
       <div class="grade-area">
         <div class="run-icon-box">
-          <text class="run-icon-text">{{ userinfo.RaceNums }}</text>
+          <text class="run-icon-text">{{ runInfoValid.RaceNums }}</text>
           <span class="iconfont icon-run">&#xe600;</span>
         </div>
         <text>总次数</text>
@@ -69,7 +117,7 @@ onBeforeMount(async () => {
           <van-col class="list-row-head-col" span="7">用时</van-col>
           <van-col class="list-row-head-col" span="4">速度</van-col>
         </van-row>
-        <van-row v-for="(item,index) in userinfo.listValue" :key="index" class="list-row">
+        <van-row v-for="(item,index) in runInfoValid.listValue" :key="index" class="list-row">
           <van-col class="list-row-head-col" span="8">{{ item.ResultDate }}</van-col>
           <van-col class="list-row-head-col" span="5">{{ item.CostDistance }}</van-col>
           <van-col class="list-row-head-col" span="7">{{ item.CostTime.slice(3) }}</van-col>
@@ -77,19 +125,18 @@ onBeforeMount(async () => {
         </van-row>
       </van-tab>
       <van-tab title="无效成绩">
-        该页面待写
-        <!--        <van-row class="list-row-head">-->
-        <!--          <van-col class="list-row-head-col" span="8">日期</van-col>-->
-        <!--          <van-col class="list-row-head-col" span="5">有效路程</van-col>-->
-        <!--          <van-col class="list-row-head-col" span="7">用时</van-col>-->
-        <!--          <van-col class="list-row-head-col" span="4">速度</van-col>-->
-        <!--        </van-row>-->
-        <!--        <van-row v-for="(item,index) in userinfo.listValue" :key="index" class="list-row">-->
-        <!--          <van-col class="list-row-head-col" span="8">{{ item.ResultDate }}</van-col>-->
-        <!--          <van-col class="list-row-head-col" span="5">{{ item.CostDistance }}</van-col>-->
-        <!--          <van-col class="list-row-head-col" span="7">{{ item.CostTime.slice(3) }}</van-col>-->
-        <!--          <van-col class="list-row-head-col" span="4">{{ item.Speed }}</van-col>-->
-        <!--        </van-row>-->
+        <van-row class="list-row-head">
+          <van-col class="list-row-head-col" span="8">日期</van-col>
+          <van-col class="list-row-head-col" span="5">有效路程</van-col>
+          <van-col class="list-row-head-col" span="7">用时</van-col>
+          <van-col class="list-row-head-col" span="4">速度</van-col>
+        </van-row>
+        <van-row v-for="(item,index) in runInfoInvalid.listInValue" :key="index" class="list-row">
+          <van-col class="list-row-head-col" span="8">{{ item.ResultDate }}</van-col>
+          <van-col class="list-row-head-col" span="5">{{ item.CostDistance }}</van-col>
+          <van-col class="list-row-head-col" span="7">{{ item.CostTime.slice(3) }}</van-col>
+          <van-col class="list-row-head-col" span="4">{{ item.Speed.toFixed(2) }}</van-col>
+        </van-row>
       </van-tab>
     </van-tabs>
   </div>

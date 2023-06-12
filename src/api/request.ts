@@ -10,13 +10,13 @@ interface ResultData<T = any> extends IResData {
     data?: T;
 }
 
-const URL = 'https://asr.wtututu.top/sunrun'
-// const URL = 'http://127.0.0.1:8000/sunRun'
+// const URL = 'https://asr.wtututu.top/sunrun'
+const URL = 'http://127.0.0.1:8000/sunRun'
 
 // const URL = 'http://192.168.2.155:8000/sunRun'
 
 enum RequestEnums {
-    TIMEOUT = 20000,
+    TIMEOUT = 5000,
     OVERDUE = 600, // 登录失效
     // FAIL = 999, // 请求失败
     SUCCESS = 200, // 请求成功

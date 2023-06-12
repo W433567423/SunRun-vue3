@@ -9,7 +9,7 @@ interface IListRecord {
     StepNum: number
 }
 
-interface IUserRunRecord {
+interface IRunRecordValid {
     AllCount: number
     LastPage: boolean
     RaceMNums: number
@@ -18,4 +18,13 @@ interface IUserRunRecord {
     listValue: IListRecord[]
 }
 
-export type {IUserRunRecord}
+interface IRunRecordInvalid {
+    AllCount: number
+    LastPage: boolean
+    RaceMNums: number
+    RaceNums: number
+    Success: boolean
+    listInValue: IListRecord[]
+}
+
+export type {IRunRecordValid, IRunRecordInvalid}

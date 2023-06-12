@@ -21,12 +21,16 @@ const putForm = (params: IPutForm) => {
 }
 
 
-// 获取用户个人信息
-const getPerson = (params: string) => {
-    return axios.get<IResData>('/user/userDetail', {nickName: params});
+// 获取用户跑步信息(有效)
+const getRunInfoValid = (params: string) => {
+    return axios.get<IResData>('/user/runInfoValid', {nickName: params});
+}
+// 获取用户跑步信息(无效)
+const getRunInfoInvalid = (params: string) => {
+    return axios.get<IResData>('/user/runInfoInvalid', {nickName: params});
 }
 // 获取总使用人数
 const getTotalUser = () => {
     return axios.get('/user/totalUser',);
 }
-export {getList, getTotalUser, putForm, searchList, getPerson, postValidatorIMEI}
+export {getList, getTotalUser, putForm, searchList, getRunInfoValid, getRunInfoInvalid, postValidatorIMEI}

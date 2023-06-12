@@ -78,7 +78,7 @@
 <script lang="ts" setup>
 import {onBeforeMount, ref} from "vue";
 import {IColumnObj, IEmitElement, IUploadForm} from "./type"
-import {getPerson, postValidatorIMEI, putForm} from "../../api"
+import {getRunInfoValid, postValidatorIMEI, putForm} from "../../api"
 import PickerPart from "./cpns/PickerPart.vue"
 import {showDialog, showNotify} from "vant";
 import MyLoading from "../../components/MyLoading.vue";
@@ -158,7 +158,7 @@ const handleUpload = async () => {
   store.commit('setLoadingTitle', '正在查询改昵称是否正在云跑步服务ing...')
   showOverLay.value = true
   setTimeout(async () => {
-    const res = await getPerson(formQuery.value.nickName)
+    const res = await getRunInfoValid(formQuery.value.nickName)
     if (res.message === 'ok') {
       //   更新逻辑处理
       showOverLay.value = false
