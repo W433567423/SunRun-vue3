@@ -77,18 +77,19 @@ onBeforeMount(async () => {
         </van-row>
       </van-tab>
       <van-tab title="无效成绩">
-        <van-row class="list-row-head">
-          <van-col class="list-row-head-col" span="8">日期</van-col>
-          <van-col class="list-row-head-col" span="5">有效路程</van-col>
-          <van-col class="list-row-head-col" span="7">用时</van-col>
-          <van-col class="list-row-head-col" span="4">速度</van-col>
-        </van-row>
-        <van-row v-for="(item,index) in userinfo.listValue" :key="index" class="list-row">
-          <van-col class="list-row-head-col" span="8">{{ item.ResultDate }}</van-col>
-          <van-col class="list-row-head-col" span="5">{{ item.CostDistance }}</van-col>
-          <van-col class="list-row-head-col" span="7">{{ item.CostTime.slice(3) }}</van-col>
-          <van-col class="list-row-head-col" span="4">{{ item.Speed }}</van-col>
-        </van-row>
+        该页面待写
+        <!--        <van-row class="list-row-head">-->
+        <!--          <van-col class="list-row-head-col" span="8">日期</van-col>-->
+        <!--          <van-col class="list-row-head-col" span="5">有效路程</van-col>-->
+        <!--          <van-col class="list-row-head-col" span="7">用时</van-col>-->
+        <!--          <van-col class="list-row-head-col" span="4">速度</van-col>-->
+        <!--        </van-row>-->
+        <!--        <van-row v-for="(item,index) in userinfo.listValue" :key="index" class="list-row">-->
+        <!--          <van-col class="list-row-head-col" span="8">{{ item.ResultDate }}</van-col>-->
+        <!--          <van-col class="list-row-head-col" span="5">{{ item.CostDistance }}</van-col>-->
+        <!--          <van-col class="list-row-head-col" span="7">{{ item.CostTime.slice(3) }}</van-col>-->
+        <!--          <van-col class="list-row-head-col" span="4">{{ item.Speed }}</van-col>-->
+        <!--        </van-row>-->
       </van-tab>
     </van-tabs>
   </div>
