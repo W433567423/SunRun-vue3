@@ -4,7 +4,7 @@
       <div class="header">
         <img alt="头像" class="thumb-img" src="https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/sunrun/thumb1.jpg">
         <div class="user-info">
-          <text class="phone-number">17762647331</text>
+          <text class="phone-number">tutu</text>
           <text class="desc-text">我多渴望一路风霜与你同行</text>
         </div>
       </div>
