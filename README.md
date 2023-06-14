@@ -24,10 +24,17 @@
 - 依赖安装`npm i`
 - 运行项目`npm run dev`
 - 项目打包`npm run build`
+-
+
+## 画饼
+
+- ~~自动打卡~~
+- 跳蚤市场
+- 校园通讯录
 
 - ## 食用方法
 
 - 实现原理:
-    1. 从手机端抓包获取阳光体育服务平台等的IMEIcode码
+    1. 从手机端抓包获取阳光体育服务平台等的IMEICode码
     2. 在[tutuのSunRun](https://run.wtututu.top)上传IMEI,将数据保存数据库
     3. 服务器定时执行脚本进行云跑步
