@@ -11,6 +11,7 @@ import {
     Collapse,
     CollapseItem,
     Divider,
+    Empty,
     Field,
     Form,
     Grid,
@@ -38,7 +39,7 @@ import {
     Tabbar,
     TabbarItem,
     Tabs,
-    Watermark,
+    Watermark
 } from 'vant'
 
 const components = [
@@ -47,7 +48,7 @@ const components = [
     Popup, Card, Watermark, Divider, BackTop, Collapse,
     CollapseItem, Swipe, SwipeItem, Progress, Grid, Picker,
     GridItem, Step, Steps, Form, Field, RadioGroup, Radio,
-    Barrage, Loading, Overlay, Tab, Tabs, ShareSheet,
+    Barrage, Loading, Overlay, Tab, Tabs, ShareSheet, Empty
 ]
 
 //全局注册常用组件

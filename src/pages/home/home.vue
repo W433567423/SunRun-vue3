@@ -21,8 +21,20 @@
       </van-row>
     </van-sticky>
     <!--列表区域-->
-    <UserList ref="userListRef"></UserList>
+    <UserList ref="userListRef" @handle-is-empty="isListEmpty"></UserList>
+    <van-empty
+        v-if="isShowEmpty"
+        class="empty-box"
+        description="空空如也"
+        image="https://fastly.jsdelivr.net/npm/@vant/assets/custom-empty-image.png"
+        image-size="80">
+      <ol>
+        <li class="li-style">本学期阳光长跑已结束</li>
+        <li class="li-style">阳光体育服务平台后台出现bug</li>
+        <li class="li-style">暂无人使用</li>
+      </ol>
 
+    </van-empty>
   </div>
 </template>
 <script lang="ts" setup>
@@ -39,7 +51,14 @@ const searchQuery = ref(''); // 搜索关键词
 const nowTime = ref<number>(0) // 当前时间戳
 const TotalCount = computed(() => store.state.user.userCount) // 总计算人数
 let timer = 0 //定时器
+const isShowEmpty = ref<boolean>(false)
 const userListRef = ref()
+
+const isListEmpty = (value: boolean) => {
+  isShowEmpty.value = value
+  console.log(isShowEmpty.value)
+}
+
 // 搜索框事件
 const handleSearch = () => {
   // searchList(searchQuery.value)
@@ -68,6 +87,7 @@ onBeforeUnmount(() => {
 <style lang="less" scoped>
 .home {
   overflow-y: auto;
+  position: relative;
   //搜索
   .search-box {
     background-color: #fff;
@@ -104,6 +124,20 @@ onBeforeUnmount(() => {
 
   .info-btn {
     margin-left: 12px;
+  }
+
+  .empty-box {
+    z-index: 99999;
+    background-color: #fff;
+    position: absolute;
+    top: 130px;
+    width: 100%;
+
+    .li-style {
+      padding: 2px 0;
+      list-style: url('../../asset/arrow_right.svg');
+      font-size: 16px;
+    }
   }
 
 }

@@ -52,7 +52,7 @@
 </template>
 <script lang="ts" setup>
 import {timeToDur} from "../../../utils";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import {IPersonN, IUserItem} from "../../../store/modules/user/type";
 import {getList, getRunInfoValid, searchList} from "../../../api";
 import {useStore} from "vuex";
@@ -64,6 +64,7 @@ const store = useStore()  //store
 const nowTime = ref<number>(0) // 当前时间戳
 const loading = ref<boolean>(false);// 加载中flag
 const finished = ref(false); // 么有更多了flag
+const isEmpty = ref(false)// 空状态
 const refreshing = ref<boolean>(false); // 下拉刷新flag
 
 const selectInfo = ref<IPersonN>({
@@ -82,11 +83,16 @@ const limit = ref<number>(20) //每页数量
 const list = ref<IUserItem[]>([]);// 循环渲染的列表
 const showOverLay = ref(false)
 
+const emits = defineEmits(['handleIsEmpty'])
+
+watch(() => finished.value, (n) => {
+  isEmpty.value = n && !list.value.length
+  emits('handleIsEmpty', isEmpty.value)
+})
+
+
 //下滑加载更多
 const onLoad = async () => {
-  console.log('下滑加载更多')
-  // 异步更新数据
-
   const res: any = await getList({
     page: page.value,
     limit: limit.value
@@ -96,7 +102,9 @@ const onLoad = async () => {
   loading.value = false;
   page.value++
   // 没有更多了
-  if (!res.data.length) finished.value = true;
+  if (!res.data.length) {
+    finished.value = true;
+  }
 };
 // 下拉刷新
 const onRefresh = async () => {
@@ -175,7 +183,7 @@ onMounted(() => {
 </script>
 <style lang="less">
 .user-list {
-  height: calc(100vh - 160px);
+  height: calc(100vh - 220px);
   background-color: #fff;
   //overflow: hidden;
   .info-btn {
