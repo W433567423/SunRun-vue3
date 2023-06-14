@@ -28,7 +28,7 @@
         description="空空如也"
         image="https://fastly.jsdelivr.net/npm/@vant/assets/custom-empty-image.png"
         image-size="80">
-      <ol>
+      <ol style="margin-top: 20px;">
         <li class="li-style">本学期阳光长跑已结束</li>
         <li class="li-style">阳光体育服务平台后台出现bug</li>
         <li class="li-style">暂无人使用</li>
@@ -130,6 +130,7 @@ onBeforeUnmount(() => {
     z-index: 99999;
     background-color: #fff;
     position: absolute;
+    padding-top: 80px;
     top: 130px;
     width: 100%;
 
