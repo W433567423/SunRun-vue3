@@ -48,6 +48,7 @@ const picNumber = computed(() => {
 
   .swipe-img {
     width: 100%;
+    max-width: 400px;
     transform: translateY(-30px);
   }
 
